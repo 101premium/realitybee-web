@@ -25,9 +25,9 @@ export const Route = createFileRoute("/")({
 });
 
 const gallery = [
-  { src: "https://hafexcreation.com/assets/images/shop/popular-products/custom-polo-tshirt-print-and-design-in-lagos-nigeria.jpg", alt: "Branded polo shirts" },
-  { src: "https://hafexcreation.com/assets/images/shop/popular-products/Premuim-business-card-print-and-design.jpg", alt: "Premium business cards" },
-  { src: "https://hafexcreation.com/assets/images/shop/popular-products/top-quality-illuminated-3D-signage.jpg", alt: "Illuminated 3D signage" },
+  { src: "/assets/products/custom-polo-tshirt-print-and-design-in-lagos-nigeria.jpg", alt: "Branded polo shirts" },
+  { src: "/assets/products/Premuim-business-card-print-and-design.jpg", alt: "Premium business cards" },
+  { src: "/assets/products/top-quality-illuminated-3D-signage.jpg", alt: "Illuminated 3D signage" },
   { src: products[1].image, alt: products[1].title },
 ];
 
