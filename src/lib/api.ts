@@ -14,15 +14,29 @@ export const API_BASE_URL = (
 /** Sort values the service accepts; anything else falls back to "featured". */
 export type ProductSort = "featured" | "priceAsc" | "priceDesc";
 
-/** Mirrors ProductSummaryDto. */
+/**
+ * Mirrors ProductSummaryDto. Prices arrive pre-formatted as "$24.36", not as
+ * numbers — use parsePrice() when you need to do arithmetic on them.
+ */
 export type ApiProductSummary = {
   id: string;
   slug: string;
   title: string;
   imageUrl: string;
-  priceUsd: number;
+  priceUsd: string;
   category: string;
 };
+
+/**
+ * "$24.36" -> 24.36. Returns 0 for anything unparseable so a bad price can never
+ * silently become NaN in a total. The value is US dollars and is used as-is —
+ * there is no currency conversion anywhere in this app.
+ */
+export function parsePrice(price: string | null | undefined): number {
+  if (!price) return 0;
+  const parsed = Number.parseFloat(price.replace(/[^\d.-]/g, ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
 
 /** Mirrors ReviewDto. */
 export type ApiReview = {
@@ -38,8 +52,8 @@ export type ApiProductDetail = {
   slug: string;
   title: string;
   imageUrl: string;
-  priceUsd: number;
-  originalPriceUsd: number | null;
+  priceUsd: string;
+  originalPriceUsd: string | null;
   discountPercent: number | null;
   sourceUrl: string;
   category: string;

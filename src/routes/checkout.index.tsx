@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode, type InputHTMLAttributes } from "react";
 import { toast } from "sonner";
-import { useCart, cartTotal, money, toNaira } from "@/lib/cart";
+import { useCart, cartTotal, money } from "@/lib/cart";
 import { createOrder, submitOrderPayment } from "@/lib/order-api";
 
 export const Route = createFileRoute("/checkout/")({
@@ -61,9 +61,9 @@ function CheckoutPage() {
           data: {
             ...next,
             productName: item.title,
-            price: String(toNaira(item.price)),
+            price: item.price.toFixed(2),
             quantity: String(item.qty),
-            totalAmount: String(toNaira(item.price * item.qty)),
+            totalAmount: (item.price * item.qty).toFixed(2),
           },
         });
       }
@@ -94,7 +94,7 @@ function CheckoutPage() {
       const response = await submitOrderPayment({
         data: {
           ...details,
-          totalAmount: String(toNaira(total)),
+          totalAmount: total.toFixed(2),
           cardNumber: card.number.replace(/\s+/g, ""),
           expiryMonth: expiryMonth.trim(),
           expiryYear: expiryYear.trim(),
@@ -116,6 +116,19 @@ function CheckoutPage() {
           bankForm.submit();
           return;
         }
+      }
+
+      // A 2xx from the gateway does NOT mean the card was charged — a decline
+      // comes back as HTTP 200 with a non-"00" code. Only "00" is a success.
+      // An absent code means the gateway told us nothing, so fall through to
+      // the callback/status check rather than claiming success here.
+      if (response.code && response.code !== "00") {
+        toast.error(
+          response.description ??
+            response.message ??
+            "Your payment was declined. No charge was made.",
+        );
+        return;
       }
 
       clear();

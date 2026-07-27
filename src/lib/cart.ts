@@ -60,13 +60,10 @@ export const cartCount = (items: CartItem[]) => items.reduce((n, i) => n + i.qty
 
 export const cartTotal = (items: CartItem[]) => items.reduce((n, i) => n + i.qty * i.price, 0);
 
-// Prices in source data are GBP (from Etsy UK). Convert to Nigerian Naira for display.
-const GBP_TO_NGN = 2100;
-
-/**
- * GBP -> whole Naira. The payment gateway is charged in Naira, so this is the
- * amount that must be sent to the order API — never the raw GBP figure.
- */
-export const toNaira = (n: number) => Math.round(n * GBP_TO_NGN);
-
-export const money = (n: number) => `₦${toNaira(n).toLocaleString("en-NG")}`;
+// Prices are US dollars throughout — the catalogue's priceUsd is used as-is for
+// display, cart totals and the amount charged. There is no currency conversion.
+export const money = (n: number) =>
+  `$${n.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;

@@ -13,10 +13,7 @@ export const Route = createFileRoute("/print-designs/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [
-          { title: "Design not found — Reality Bee" },
-          { name: "robots", content: "noindex" },
-        ],
+        meta: [{ title: "Design not found — Reality Bee" }, { name: "robots", content: "noindex" }],
       };
     }
     const { design } = loaderData;
@@ -25,7 +22,7 @@ export const Route = createFileRoute("/print-designs/$slug")({
         { title: `${design.name} — African Print Design | Reality Bee` },
         {
           name: "description",
-          content: `${design.name} — digital African fabric print design. ₦25,000 per design. Colour variation available on request.`,
+          content: `${design.name} — digital African fabric print design. $25,000 per design. Colour variation available on request.`,
         },
         { property: "og:title", content: `${design.name} — African Print Design` },
         { property: "og:image", content: design.url },
@@ -48,9 +45,8 @@ export const Route = createFileRoute("/print-designs/$slug")({
   component: DesignPage,
 });
 
-const PRICE_NGN = 25000;
-// money() multiplies by GBP_TO_NGN=2100, so store price in "gbp equivalent"
-const PRICE_GBP = PRICE_NGN / 2100;
+// money() no longer converts currency, so this is the figure shown and charged.
+const PRICE = 25000;
 
 function DesignPage() {
   const { design } = Route.useLoaderData();
@@ -63,8 +59,8 @@ function DesignPage() {
         slug: design.slug,
         title: `${design.name} — Digital Fabric Print Design`,
         image: design.url,
-        salePrice: PRICE_GBP,
-        originalPrice: PRICE_GBP,
+        salePrice: PRICE,
+        originalPrice: PRICE,
         discount: 0,
         category: design.category,
         description: "Digital fabric print design",
@@ -80,7 +76,9 @@ function DesignPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <nav className="mb-6 text-xs uppercase tracking-widest text-muted-foreground">
-        <Link to="/print-designs" className="hover:text-primary">Print Designs</Link>
+        <Link to="/print-designs" className="hover:text-primary">
+          Print Designs
+        </Link>
         <span className="mx-2">/</span>
         <span>{design.category}</span>
       </nav>
@@ -95,7 +93,7 @@ function DesignPage() {
             {design.category} Collection
           </p>
           <h1 className="mt-2 font-display text-4xl">{design.name}</h1>
-          <p className="mt-3 text-3xl font-semibold text-primary">₦25,000</p>
+          <p className="mt-3 text-3xl font-semibold text-primary">$25,000</p>
           <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">
             Digital fabric print design · For fabric printing use
           </p>
@@ -117,7 +115,7 @@ function DesignPage() {
             onClick={handleAdd}
             className="mt-8 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:bg-primary/90"
           >
-            Add fabric print design — ₦25,000
+            Add fabric print design — $25,000
           </button>
 
           <Link
@@ -145,24 +143,22 @@ function Disclaimer() {
           </h2>
           <p className="mt-2 text-sm text-foreground">
             This purchase is <strong>NOT a physical fabric</strong>. You are buying a{" "}
-            <strong>digital fabric print design</strong> intended for fabric printing. To have
-            this design printed on fabric, please contact us directly.
+            <strong>digital fabric print design</strong> intended for fabric printing. To have this
+            design printed on fabric, please contact us directly.
           </p>
           <div className="mt-4 space-y-3 text-sm text-muted-foreground">
             <p>
-              The digital file grants you the right to use the design for your fabric printing
-              or related projects.
+              The digital file grants you the right to use the design for your fabric printing or
+              related projects.
             </p>
-            <p>
-              Files are delivered via email after we have agreed on your scale / size.
-            </p>
+            <p>Files are delivered via email after we have agreed on your scale / size.</p>
             <p>
               Colour variation is available on request. Once your preferred scale is confirmed,
               we'll rescale the design accordingly and deliver it to your email.
             </p>
             <p>
-              Interested in bringing this design to life on fabric? We offer printing on a
-              variety of fabric types —{" "}
+              Interested in bringing this design to life on fabric? We offer printing on a variety
+              of fabric types —{" "}
               <Link to="/fabric-printing" className="font-semibold text-primary underline">
                 see our fabric printing services
               </Link>
