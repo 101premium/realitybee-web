@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode, type InputHTMLAttributes } from "react";
 import { toast } from "sonner";
+import { AlertCircle } from "lucide-react";
 import { useCart, cartTotal, money } from "@/lib/cart";
 import { createOrder, submitOrderPayment } from "@/lib/order-api";
 
@@ -32,6 +33,14 @@ function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
   const [details, setDetails] = useState<Details | null>(null);
   const [card, setCard] = useState({ number: "", expiry: "", cvv: "" });
+  // Shown inline above the submit button as well as via toast — a toast can be
+  // missed or auto-dismissed, and a failed payment needs to stay on screen.
+  const [formError, setFormError] = useState<string | null>(null);
+
+  function fail(message: string) {
+    setFormError(message);
+    toast.error(message);
+  }
 
   // The order API models one product per order, so a multi-line basket becomes
   // one order per line. Payment stays a single transaction for the basket total —
@@ -54,6 +63,7 @@ function CheckoutPage() {
       postalCode: value("postalCode"),
     };
 
+    setFormError(null);
     setSubmitting(true);
     try {
       for (const item of items) {
@@ -71,7 +81,7 @@ function CheckoutPage() {
       setStep("payment");
       toast.success("Order created — enter your card details to pay.");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Could not create your order.");
+      fail(error instanceof Error ? error.message : "Could not create your order.");
     } finally {
       setSubmitting(false);
     }
@@ -85,10 +95,11 @@ function CheckoutPage() {
     const [expiryMonth, shortYear] = card.expiry.split("/");
     const expiryYear = shortYear ? (shortYear.length === 2 ? `20${shortYear}` : shortYear) : "";
     if (!expiryMonth || !expiryYear) {
-      toast.error("Enter the card expiry as MM/YY.");
+      fail("Enter the card expiry as MM/YY.");
       return;
     }
 
+    setFormError(null);
     setSubmitting(true);
     try {
       const response = await submitOrderPayment({
@@ -123,7 +134,7 @@ function CheckoutPage() {
       // An absent code means the gateway told us nothing, so fall through to
       // the callback/status check rather than claiming success here.
       if (response.code && response.code !== "00") {
-        toast.error(
+        fail(
           response.description ??
             response.message ??
             "Your payment was declined. No charge was made.",
@@ -140,7 +151,7 @@ function CheckoutPage() {
         },
       });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Payment could not be completed.");
+      fail(error instanceof Error ? error.message : "Payment could not be completed.");
     } finally {
       setSubmitting(false);
     }
@@ -247,6 +258,18 @@ function CheckoutPage() {
             <span>Total</span>
             <span>{money(total)}</span>
           </div>
+
+          {formError && (
+            <p
+              role="alert"
+              aria-live="assertive"
+              className="mt-4 flex items-start gap-2 rounded-md border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive"
+            >
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+              <span>{formError}</span>
+            </p>
+          )}
+
           <button
             type="submit"
             disabled={submitting}

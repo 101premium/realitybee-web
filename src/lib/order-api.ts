@@ -143,6 +143,16 @@ export class OrderApiError extends Error {
 const MERCHANT_ID = () => process.env.MERCHANT_ID || "SCHKGWUF";
 const COMPANY_NAME = () => process.env.COMPANY_NAME || "OPTIMUM-SYSTEM";
 
+/**
+ * IntegrationService.paymentAdvice() branches on this and returns null for
+ * anything that is not exactly "NGN" or "USD", so it must never be blank or
+ * client-supplied. Catalogue prices are US dollars, hence the USD default.
+ */
+const PAYMENT_CURRENCY = () => {
+  const currency = (process.env.PAYMENT_CURRENCY || "USD").toUpperCase();
+  return currency === "NGN" ? "NGN" : "USD";
+};
+
 function orderApiConfig() {
   const baseUrl = (process.env.ORDER_API_URL ?? "https://payments.realitybee.com.ng").replace(
     /\/+$/,
@@ -275,6 +285,7 @@ export const submitOrderPayment = createServerFn({ method: "POST" })
     return orderApiFetch<CardPaymentResponse>("/payment", {
       method: "POST",
       body: {
+        currency: PAYMENT_CURRENCY(),
         totalAmount: data.totalAmount,
         firstName: data.firstName,
         lastName: data.lastName,
