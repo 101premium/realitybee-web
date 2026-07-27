@@ -9,13 +9,13 @@ export const Route = createFileRoute("/print-designs/")({
       {
         name: "description",
         content:
-          "Digital African print designs for fabric printing. Fixed ₦25,000 per design. Colour variation available on request. Contemporary & cultural collections.",
+          "Digital African print designs for fabric printing. Fixed $25,000 per design. Colour variation available on request. Contemporary & cultural collections.",
       },
       { property: "og:title", content: "African Print Designs — Digital Fabric Prints" },
       {
         property: "og:description",
         content:
-          "60 digital African fabric print designs — ₦25,000 each. Contemporary and cultural collections for fabric printing.",
+          "60 digital African fabric print designs — $25,000 each. Contemporary and cultural collections for fabric printing.",
       },
     ],
   }),
@@ -41,13 +41,13 @@ function PrintDesignsIndex() {
             African <span className="text-primary">Print Designs</span>
           </h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            Original digital fabric prints, drawn from contemporary Afro-futurism and rich
-            cultural heritage. Designed for fabric printing — rescale and colour variations
-            available on request.
+            Original digital fabric prints, drawn from contemporary Afro-futurism and rich cultural
+            heritage. Designed for fabric printing — rescale and colour variations available on
+            request.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
             <span className="rounded-full bg-primary px-4 py-1.5 font-semibold text-primary-foreground">
-              ₦25,000 per design
+              $25,000 per design
             </span>
             <span className="rounded-full border border-border bg-card px-4 py-1.5 font-medium">
               For fabric printing
@@ -104,7 +104,7 @@ function PrintDesignsIndex() {
                 <h3 className="text-sm font-medium leading-snug text-foreground group-hover:text-primary">
                   {d.name}
                 </h3>
-                <p className="text-sm font-semibold text-primary">₦25,000</p>
+                <p className="text-sm font-semibold text-primary">$25,000</p>
               </div>
             </Link>
           ))}
