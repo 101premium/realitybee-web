@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode, type InputHTMLAttributes } from "react";
 import { useCart, cartTotal, money } from "@/lib/cart";
 
-export const Route = createFileRoute("/checkout")({
+export const Route = createFileRoute("/checkout/")({
   head: () => ({
     meta: [
       { title: "Checkout — SolunaSoul" },
