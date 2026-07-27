@@ -24,6 +24,7 @@ import { Route as SizingFramingRouteImport } from './routes/sizing-framing'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as CheckoutIndexRouteImport } from './routes/checkout.index'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
+import { Route as PaymentCallbackReferenceRouteImport } from './routes/payment-callback.$reference'
 import { Route as PrintDesignsIndexRouteImport } from './routes/print-designs.index'
 import { Route as PrintDesignsSlugRouteImport } from './routes/print-designs.$slug'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
@@ -104,6 +105,12 @@ const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   path: '/checkout/success',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PaymentCallbackReferenceRoute =
+  PaymentCallbackReferenceRouteImport.update({
+    id: '/payment-callback/$reference',
+    path: '/payment-callback/$reference',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const PrintDesignsIndexRoute = PrintDesignsIndexRouteImport.update({
   id: '/print-designs/',
   path: '/print-designs/',
@@ -140,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/sizing-framing': typeof SizingFramingRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/payment-callback/$reference': typeof PaymentCallbackReferenceRoute
   '/print-designs/$slug': typeof PrintDesignsSlugRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/checkout/': typeof CheckoutIndexRoute
@@ -161,6 +169,7 @@ export interface FileRoutesByTo {
   '/sizing-framing': typeof SizingFramingRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/payment-callback/$reference': typeof PaymentCallbackReferenceRoute
   '/print-designs/$slug': typeof PrintDesignsSlugRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/checkout': typeof CheckoutIndexRoute
@@ -183,6 +192,7 @@ export interface FileRoutesById {
   '/sizing-framing': typeof SizingFramingRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/payment-callback/$reference': typeof PaymentCallbackReferenceRoute
   '/print-designs/$slug': typeof PrintDesignsSlugRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/checkout/': typeof CheckoutIndexRoute
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/sizing-framing'
     | '/terms-and-conditions'
     | '/checkout/success'
+    | '/payment-callback/$reference'
     | '/print-designs/$slug'
     | '/shop/$slug'
     | '/checkout/'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/sizing-framing'
     | '/terms-and-conditions'
     | '/checkout/success'
+    | '/payment-callback/$reference'
     | '/print-designs/$slug'
     | '/shop/$slug'
     | '/checkout'
@@ -248,6 +260,7 @@ export interface FileRouteTypes {
     | '/sizing-framing'
     | '/terms-and-conditions'
     | '/checkout/success'
+    | '/payment-callback/$reference'
     | '/print-designs/$slug'
     | '/shop/$slug'
     | '/checkout/'
@@ -270,6 +283,7 @@ export interface RootRouteChildren {
   SizingFramingRoute: typeof SizingFramingRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   CheckoutSuccessRoute: typeof CheckoutSuccessRoute
+  PaymentCallbackReferenceRoute: typeof PaymentCallbackReferenceRoute
   PrintDesignsSlugRoute: typeof PrintDesignsSlugRoute
   ShopSlugRoute: typeof ShopSlugRoute
   CheckoutIndexRoute: typeof CheckoutIndexRoute
@@ -384,6 +398,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutSuccessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/payment-callback/$reference': {
+      id: '/payment-callback/$reference'
+      path: '/payment-callback/$reference'
+      fullPath: '/payment-callback/$reference'
+      preLoaderRoute: typeof PaymentCallbackReferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/print-designs/': {
       id: '/print-designs/'
       path: '/print-designs'
@@ -430,6 +451,7 @@ const rootRouteChildren: RootRouteChildren = {
   SizingFramingRoute: SizingFramingRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   CheckoutSuccessRoute: CheckoutSuccessRoute,
+  PaymentCallbackReferenceRoute: PaymentCallbackReferenceRoute,
   PrintDesignsSlugRoute: PrintDesignsSlugRoute,
   ShopSlugRoute: ShopSlugRoute,
   CheckoutIndexRoute: CheckoutIndexRoute,
