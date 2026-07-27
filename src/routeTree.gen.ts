@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BrandedGiftsRouteImport } from './routes/branded-gifts'
 import { Route as CartRouteImport } from './routes/cart'
-import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CorporateBrandingRouteImport } from './routes/corporate-branding'
 import { Route as FabricPrintingRouteImport } from './routes/fabric-printing'
 import { Route as MadeToOrderRouteImport } from './routes/made-to-order'
@@ -23,6 +22,7 @@ import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as SizingFramingRouteImport } from './routes/sizing-framing'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as CheckoutIndexRouteImport } from './routes/checkout.index'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as PrintDesignsIndexRouteImport } from './routes/print-designs.index'
 import { Route as PrintDesignsSlugRouteImport } from './routes/print-designs.$slug'
@@ -47,11 +47,6 @@ const BrandedGiftsRoute = BrandedGiftsRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckoutRoute = CheckoutRouteImport.update({
-  id: '/checkout',
-  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CorporateBrandingRoute = CorporateBrandingRouteImport.update({
@@ -99,10 +94,15 @@ const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   path: '/terms-and-conditions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutIndexRoute = CheckoutIndexRouteImport.update({
+  id: '/checkout/',
+  path: '/checkout/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
-  id: '/success',
-  path: '/success',
-  getParentRoute: () => CheckoutRoute,
+  id: '/checkout/success',
+  path: '/checkout/success',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PrintDesignsIndexRoute = PrintDesignsIndexRouteImport.update({
   id: '/print-designs/',
@@ -130,7 +130,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/branded-gifts': typeof BrandedGiftsRoute
   '/cart': typeof CartRoute
-  '/checkout': typeof CheckoutRouteWithChildren
   '/corporate-branding': typeof CorporateBrandingRoute
   '/fabric-printing': typeof FabricPrintingRoute
   '/made-to-order': typeof MadeToOrderRoute
@@ -143,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/print-designs/$slug': typeof PrintDesignsSlugRoute
   '/shop/$slug': typeof ShopSlugRoute
+  '/checkout/': typeof CheckoutIndexRoute
   '/print-designs/': typeof PrintDesignsIndexRoute
   '/shop/': typeof ShopIndexRoute
 }
@@ -151,7 +151,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/branded-gifts': typeof BrandedGiftsRoute
   '/cart': typeof CartRoute
-  '/checkout': typeof CheckoutRouteWithChildren
   '/corporate-branding': typeof CorporateBrandingRoute
   '/fabric-printing': typeof FabricPrintingRoute
   '/made-to-order': typeof MadeToOrderRoute
@@ -164,6 +163,7 @@ export interface FileRoutesByTo {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/print-designs/$slug': typeof PrintDesignsSlugRoute
   '/shop/$slug': typeof ShopSlugRoute
+  '/checkout': typeof CheckoutIndexRoute
   '/print-designs': typeof PrintDesignsIndexRoute
   '/shop': typeof ShopIndexRoute
 }
@@ -173,7 +173,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/branded-gifts': typeof BrandedGiftsRoute
   '/cart': typeof CartRoute
-  '/checkout': typeof CheckoutRouteWithChildren
   '/corporate-branding': typeof CorporateBrandingRoute
   '/fabric-printing': typeof FabricPrintingRoute
   '/made-to-order': typeof MadeToOrderRoute
@@ -186,6 +185,7 @@ export interface FileRoutesById {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/print-designs/$slug': typeof PrintDesignsSlugRoute
   '/shop/$slug': typeof ShopSlugRoute
+  '/checkout/': typeof CheckoutIndexRoute
   '/print-designs/': typeof PrintDesignsIndexRoute
   '/shop/': typeof ShopIndexRoute
 }
@@ -196,7 +196,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/branded-gifts'
     | '/cart'
-    | '/checkout'
     | '/corporate-branding'
     | '/fabric-printing'
     | '/made-to-order'
@@ -209,6 +208,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/print-designs/$slug'
     | '/shop/$slug'
+    | '/checkout/'
     | '/print-designs/'
     | '/shop/'
   fileRoutesByTo: FileRoutesByTo
@@ -217,7 +217,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/branded-gifts'
     | '/cart'
-    | '/checkout'
     | '/corporate-branding'
     | '/fabric-printing'
     | '/made-to-order'
@@ -230,6 +229,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/print-designs/$slug'
     | '/shop/$slug'
+    | '/checkout'
     | '/print-designs'
     | '/shop'
   id:
@@ -238,7 +238,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/branded-gifts'
     | '/cart'
-    | '/checkout'
     | '/corporate-branding'
     | '/fabric-printing'
     | '/made-to-order'
@@ -251,6 +250,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/print-designs/$slug'
     | '/shop/$slug'
+    | '/checkout/'
     | '/print-designs/'
     | '/shop/'
   fileRoutesById: FileRoutesById
@@ -260,7 +260,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BrandedGiftsRoute: typeof BrandedGiftsRoute
   CartRoute: typeof CartRoute
-  CheckoutRoute: typeof CheckoutRouteWithChildren
   CorporateBrandingRoute: typeof CorporateBrandingRoute
   FabricPrintingRoute: typeof FabricPrintingRoute
   MadeToOrderRoute: typeof MadeToOrderRoute
@@ -270,8 +269,10 @@ export interface RootRouteChildren {
   ShippingRoute: typeof ShippingRoute
   SizingFramingRoute: typeof SizingFramingRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
   PrintDesignsSlugRoute: typeof PrintDesignsSlugRoute
   ShopSlugRoute: typeof ShopSlugRoute
+  CheckoutIndexRoute: typeof CheckoutIndexRoute
   PrintDesignsIndexRoute: typeof PrintDesignsIndexRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
@@ -304,13 +305,6 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkout': {
-      id: '/checkout'
-      path: '/checkout'
-      fullPath: '/checkout'
-      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/corporate-branding': {
@@ -376,12 +370,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout/': {
+      id: '/checkout/'
+      path: '/checkout'
+      fullPath: '/checkout/'
+      preLoaderRoute: typeof CheckoutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout/success': {
       id: '/checkout/success'
-      path: '/success'
+      path: '/checkout/success'
       fullPath: '/checkout/success'
       preLoaderRoute: typeof CheckoutSuccessRouteImport
-      parentRoute: typeof CheckoutRoute
+      parentRoute: typeof rootRouteImport
     }
     '/print-designs/': {
       id: '/print-designs/'
@@ -414,24 +415,11 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface CheckoutRouteChildren {
-  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
-}
-
-const CheckoutRouteChildren: CheckoutRouteChildren = {
-  CheckoutSuccessRoute: CheckoutSuccessRoute,
-}
-
-const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
-  CheckoutRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BrandedGiftsRoute: BrandedGiftsRoute,
   CartRoute: CartRoute,
-  CheckoutRoute: CheckoutRouteWithChildren,
   CorporateBrandingRoute: CorporateBrandingRoute,
   FabricPrintingRoute: FabricPrintingRoute,
   MadeToOrderRoute: MadeToOrderRoute,
@@ -441,8 +429,10 @@ const rootRouteChildren: RootRouteChildren = {
   ShippingRoute: ShippingRoute,
   SizingFramingRoute: SizingFramingRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
   PrintDesignsSlugRoute: PrintDesignsSlugRoute,
   ShopSlugRoute: ShopSlugRoute,
+  CheckoutIndexRoute: CheckoutIndexRoute,
   PrintDesignsIndexRoute: PrintDesignsIndexRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
