@@ -75,10 +75,10 @@ const priceList: Row[] = [
     retail: "$9.50",
     wholesale: "$8.50",
   },
-  { label: "Custom Scarf Printing", unit: "Each", retail: "$8,500", wholesale: "$7,000" },
-  { label: "Head Wrap (Gele) Printing", unit: "Each", retail: "$9,500", wholesale: "$8,000" },
-  { label: "Table Cloth Printing", unit: "Each", retail: "From $18,000", wholesale: "Quote" },
-  { label: "Curtain Fabric Printing", unit: "Per Metre", retail: "$11,500", wholesale: "$10,000" },
+  { label: "Custom Scarf Printing", unit: "Each", retail: "$8.50", wholesale: "$7.00" },
+  { label: "Head Wrap (Gele) Printing", unit: "Each", retail: "$9.50", wholesale: "$8.00" },
+  { label: "Table Cloth Printing", unit: "Each", retail: "From $18.00", wholesale: "Quote" },
+  { label: "Curtain Fabric Printing", unit: "Per Metre", retail: "$11.50", wholesale: "$10.00" },
   {
     label: "Upholstery Fabric Printing",
     unit: "Per Metre",
@@ -255,12 +255,12 @@ function FabricPrintingPage() {
               alt="African Fabric Printing Services flyer"
               className="mx-auto w-full max-w-md rounded-2xl border border-border/60 shadow-2xl"
             />
-            <a
-              href={flyerAsset.url}
-              download="Reality-Bee-Fabric-Printing-Flyer.png"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold hover:border-primary hover:text-primary"
-            >
-              <Download className="h-4 w-4" /> Download flyer
+//             <a
+//               href={flyerAsset.url}
+//               download="Reality-Bee-Fabric-Printing-Flyer.png"
+//               className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold hover:border-primary hover:text-primary"
+//             >
+//               <Download className="h-4 w-4" /> Download flyer
             </a>
           </div>
         </div>
