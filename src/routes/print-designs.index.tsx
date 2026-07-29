@@ -15,7 +15,7 @@ export const Route = createFileRoute("/print-designs/")({
       {
         property: "og:description",
         content:
-          "60 digital African fabric print designs — $24.00 each. Contemporary and cultural collections for fabric printing.",
+          "60 digital African fabric print designs — $25.00 each. Contemporary and cultural collections for fabric printing.",
       },
     ],
   }),
