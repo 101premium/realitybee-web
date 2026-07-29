@@ -9,7 +9,7 @@ export const Route = createFileRoute("/print-designs/")({
       {
         name: "description",
         content:
-          "Digital African print designs for fabric printing. Fixed $24.00 per design. Colour variation available on request. Contemporary & cultural collections.",
+          "Digital African print designs for fabric printing. Fixed $25.00 per design. Colour variation available on request. Contemporary & cultural collections.",
       },
       { property: "og:title", content: "African Print Designs — Digital Fabric Prints" },
       {
@@ -104,7 +104,7 @@ function PrintDesignsIndex() {
                 <h3 className="text-sm font-medium leading-snug text-foreground group-hover:text-primary">
                   {d.name}
                 </h3>
-                <p className="text-sm font-semibold text-primary">$24.00</p>
+                <p className="text-sm font-semibold text-primary">$25.00</p>
               </div>
             </Link>
           ))}
