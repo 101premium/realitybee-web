@@ -22,7 +22,7 @@ export const Route = createFileRoute("/print-designs/$slug")({
         { title: `${design.name} — African Print Design | Reality Bee` },
         {
           name: "description",
-          content: `${design.name} — digital African fabric print design. $24.00 per design. Colour variation available on request.`,
+          content: `${design.name} — digital African fabric print design. $25.00 per design. Colour variation available on request.`,
         },
         { property: "og:title", content: `${design.name} — African Print Design` },
         { property: "og:image", content: design.url },
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/print-designs/$slug")({
 });
 
 // money() no longer converts currency, so this is the figure shown and charged.
-const PRICE = 25000;
+const PRICE = 25.00;
 
 function DesignPage() {
   const { design } = Route.useLoaderData();
@@ -115,7 +115,7 @@ function DesignPage() {
             onClick={handleAdd}
             className="mt-8 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:bg-primary/90"
           >
-            Add fabric print design — $24.00
+            Add fabric print design — $25.00
           </button>
 
           <Link
