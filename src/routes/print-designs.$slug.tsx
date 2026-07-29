@@ -22,7 +22,7 @@ export const Route = createFileRoute("/print-designs/$slug")({
         { title: `${design.name} — African Print Design | Reality Bee` },
         {
           name: "description",
-          content: `${design.name} — digital African fabric print design. $25,000 per design. Colour variation available on request.`,
+          content: `${design.name} — digital African fabric print design. $24.00 per design. Colour variation available on request.`,
         },
         { property: "og:title", content: `${design.name} — African Print Design` },
         { property: "og:image", content: design.url },
@@ -93,7 +93,7 @@ function DesignPage() {
             {design.category} Collection
           </p>
           <h1 className="mt-2 font-display text-4xl">{design.name}</h1>
-          <p className="mt-3 text-3xl font-semibold text-primary">$25,000</p>
+          <p className="mt-3 text-3xl font-semibold text-primary">$25.00</p>
           <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">
             Digital fabric print design · For fabric printing use
           </p>
@@ -115,7 +115,7 @@ function DesignPage() {
             onClick={handleAdd}
             className="mt-8 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:bg-primary/90"
           >
-            Add fabric print design — $25,000
+            Add fabric print design — $24.00
           </button>
 
           <Link
