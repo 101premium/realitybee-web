@@ -255,12 +255,12 @@ function FabricPrintingPage() {
               alt="African Fabric Printing Services flyer"
               className="mx-auto w-full max-w-md rounded-2xl border border-border/60 shadow-2xl"
             />
-//             <a
+            <a
 //               href={flyerAsset.url}
 //               download="Reality-Bee-Fabric-Printing-Flyer.png"
-//               className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold hover:border-primary hover:text-primary"
-//             >
-//               <Download className="h-4 w-4" /> Download flyer
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold hover:border-primary hover:text-primary"
+            >
+              <Download className="h-4 w-4" /> Download flyer
             </a>
           </div>
         </div>
