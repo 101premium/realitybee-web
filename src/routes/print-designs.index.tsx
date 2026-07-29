@@ -47,7 +47,7 @@ function PrintDesignsIndex() {
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
             <span className="rounded-full bg-primary px-4 py-1.5 font-semibold text-primary-foreground">
-              $24.00 per design
+              $25.00 per design
             </span>
             <span className="rounded-full border border-border bg-card px-4 py-1.5 font-medium">
               For fabric printing
