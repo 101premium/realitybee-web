@@ -60,15 +60,15 @@ const priceList: Row[] = [
     retail: "$10.50",
     wholesale: "$9.2",
   },
-  { label: "Satin Fabric Printing", unit: "Per Metre", retail: "$12,500", wholesale: "$11,000" },
-  { label: "Chiffon Printing", unit: "Per Metre", retail: "$11,500", wholesale: "$10,000" },
+  { label: "Satin Fabric Printing", unit: "Per Metre", retail: "$12.50", wholesale: "$11.00" },
+  { label: "Chiffon Printing", unit: "Per Metre", retail: "$11.50", wholesale: "$10.00" },
   {
     label: "Silk Feel Polyester Printing",
     unit: "Per Metre",
     retail: "$13.50",
     wholesale: "$12.00",
   },
-  { label: "Cotton Blend Printing", unit: "Per Metre", retail: "$12,000", wholesale: "$10,800" },
+  { label: "Cotton Blend Printing", unit: "Per Metre", retail: "$12.00", wholesale: "$10.80" },
   {
     label: "Ankara Inspired Digital Prints",
     unit: "Per Metre",
