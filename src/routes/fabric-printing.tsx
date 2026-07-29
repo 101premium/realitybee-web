@@ -45,35 +45,35 @@ const priceList: Row[] = [
   {
     label: "Custom Sublimation Printing (Customer Fabric)",
     unit: "Per Metre",
-    retail: "$5,500",
-    wholesale: "$4,800",
+    retail: "$5.00",
+    wholesale: "$4.80",
   },
   {
     label: "Polyester Fabric + Printing (150gsm)",
     unit: "Per Metre",
-    retail: "$8,500",
-    wholesale: "$7,500",
+    retail: "$8.50",
+    wholesale: "$7.50",
   },
   {
     label: "Premium Polyester + Printing",
     unit: "Per Metre",
-    retail: "$10,500",
-    wholesale: "$9,200",
+    retail: "$10.50",
+    wholesale: "$9.2",
   },
   { label: "Satin Fabric Printing", unit: "Per Metre", retail: "$12,500", wholesale: "$11,000" },
   { label: "Chiffon Printing", unit: "Per Metre", retail: "$11,500", wholesale: "$10,000" },
   {
     label: "Silk Feel Polyester Printing",
     unit: "Per Metre",
-    retail: "$13,500",
-    wholesale: "$12,000",
+    retail: "$13.50",
+    wholesale: "$12.00",
   },
   { label: "Cotton Blend Printing", unit: "Per Metre", retail: "$12,000", wholesale: "$10,800" },
   {
     label: "Ankara Inspired Digital Prints",
     unit: "Per Metre",
-    retail: "$9,500",
-    wholesale: "$8,500",
+    retail: "$9.50",
+    wholesale: "$8.50",
   },
   { label: "Custom Scarf Printing", unit: "Each", retail: "$8,500", wholesale: "$7,000" },
   { label: "Head Wrap (Gele) Printing", unit: "Each", retail: "$9,500", wholesale: "$8,000" },
@@ -82,29 +82,29 @@ const priceList: Row[] = [
   {
     label: "Upholstery Fabric Printing",
     unit: "Per Metre",
-    retail: "$14,500",
-    wholesale: "$13,000",
+    retail: "$14.50",
+    wholesale: "$13.00",
   },
 ];
 
 const designServices = [
-  ["Basic Artwork Adjustment", "$5,000"],
-  ["Pattern Repeat Setup", "$8,000"],
-  ["Custom African Print Design", "$35,000 – $150,000"],
-  ["Logo Placement Design", "$15,000"],
-  ["Colour Matching Service", "$10,000"],
+  ["Basic Artwork Adjustment", "$5.00"],
+  ["Pattern Repeat Setup", "$8.00"],
+  ["Custom African Print Design", "$35.00 – $150.00"],
+  ["Logo Placement Design", "$15.00"],
+  ["Colour Matching Service", "$10.00"],
 ];
 
 const sampling = [
-  ["A4 Fabric Sample", "$3,500"],
-  ["0.5 Metre Sample", "$5,500"],
+  ["A4 Fabric Sample", "$3.50"],
+  ["0.5 Metre Sample", "$5.50"],
   ["1 Metre Trial Print", "Standard Rate"],
 ];
 
 const packages = [
-  ["Startup Designer Package (10m)", "$80,000"],
-  ["Boutique Package (25m)", "$185,000"],
-  ["Fashion Brand Package (50m)", "$350,000"],
+  ["Startup Designer Package (10m)", "$80.00"],
+  ["Boutique Package (25m)", "$185.00"],
+  ["Fashion Brand Package (50m)", "$350.00"],
   ["Commercial Production (100m+)", "Custom Quote"],
 ];
 
@@ -126,8 +126,8 @@ const volume = [
 
 const addOns = [
   ["Express Printing (24 Hours)", "+30%"],
-  ["Colour Proof", "$7,500"],
-  ["Premium Packaging", "From $3,000"],
+  ["Colour Proof", "$7.50"],
+  ["Premium Packaging", "From $3.00"],
   ["Nationwide Delivery", "At Cost"],
   ["International Shipping", "At Cost"],
 ];
