@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 -)"
+      "Bash(python3 -)",
+      "Bash(npx tsr *)",
+      "Bash(grep -n ''\\\\''/$reference'\\\\''' src/routeTree.gen.ts)",
+      "Bash(timeout 180 npx vite build)",
+      "Bash(npx vite *)",
+      "Bash(bun install *)",
+      "Bash(bun run *)",
+      "Bash(grep -n 'ReferenceRoute\\\\b\\\\|'\\\\''/$reference'\\\\''' src/routeTree.gen.ts)",
+      "Bash(curl -s \"http://localhost:3000/7fce80ef469b4b6f84aba489ae16b0fb?adviceReference=7441773f-38ad-413b-ae49-758ff4d5124f&paymentReference=4966e2d78b614cf5bc3f32227b0d1cb7\")",
+      "Bash(curl -s \"http://localhost:3000/some-random-page\")",
+      "Bash(kill %1)"
     ]
   }
 }

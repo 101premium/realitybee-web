@@ -9,80 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as BrandedGiftsRouteImport } from './routes/branded-gifts'
-import { Route as CartRouteImport } from './routes/cart'
-import { Route as CorporateBrandingRouteImport } from './routes/corporate-branding'
-import { Route as FabricPrintingRouteImport } from './routes/fabric-printing'
-import { Route as MadeToOrderRouteImport } from './routes/made-to-order'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
-import { Route as ReviewsRouteImport } from './routes/reviews'
-import { Route as ShippingRouteImport } from './routes/shipping'
-import { Route as SizingFramingRouteImport } from './routes/sizing-framing'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
-import { Route as CheckoutIndexRouteImport } from './routes/checkout.index'
-import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
-import { Route as PaymentCallbackReferenceRouteImport } from './routes/payment-callback.$reference'
-import { Route as PrintDesignsIndexRouteImport } from './routes/print-designs.index'
-import { Route as PrintDesignsSlugRouteImport } from './routes/print-designs.$slug'
+import { Route as SizingFramingRouteImport } from './routes/sizing-framing'
+import { Route as ShippingRouteImport } from './routes/shipping'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as MadeToOrderRouteImport } from './routes/made-to-order'
+import { Route as FabricPrintingRouteImport } from './routes/fabric-printing'
+import { Route as CorporateBrandingRouteImport } from './routes/corporate-branding'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as BrandedGiftsRouteImport } from './routes/branded-gifts'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ReferenceRouteImport } from './routes/$reference'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
+import { Route as PrintDesignsIndexRouteImport } from './routes/print-designs.index'
+import { Route as CheckoutIndexRouteImport } from './routes/checkout.index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
+import { Route as PrintDesignsSlugRouteImport } from './routes/print-designs.$slug'
+import { Route as PaymentCallbackReferenceRouteImport } from './routes/payment-callback.$reference'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrandedGiftsRoute = BrandedGiftsRouteImport.update({
-  id: '/branded-gifts',
-  path: '/branded-gifts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CartRoute = CartRouteImport.update({
-  id: '/cart',
-  path: '/cart',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CorporateBrandingRoute = CorporateBrandingRouteImport.update({
-  id: '/corporate-branding',
-  path: '/corporate-branding',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FabricPrintingRoute = FabricPrintingRouteImport.update({
-  id: '/fabric-printing',
-  path: '/fabric-printing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MadeToOrderRoute = MadeToOrderRouteImport.update({
-  id: '/made-to-order',
-  path: '/made-to-order',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RefundPolicyRoute = RefundPolicyRouteImport.update({
-  id: '/refund-policy',
-  path: '/refund-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReviewsRoute = ReviewsRouteImport.update({
-  id: '/reviews',
-  path: '/reviews',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ShippingRoute = ShippingRouteImport.update({
-  id: '/shipping',
-  path: '/shipping',
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SizingFramingRoute = SizingFramingRouteImport.update({
@@ -90,9 +41,74 @@ const SizingFramingRoute = SizingFramingRouteImport.update({
   path: '/sizing-framing',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
-  id: '/terms-and-conditions',
-  path: '/terms-and-conditions',
+const ShippingRoute = ShippingRouteImport.update({
+  id: '/shipping',
+  path: '/shipping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MadeToOrderRoute = MadeToOrderRouteImport.update({
+  id: '/made-to-order',
+  path: '/made-to-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FabricPrintingRoute = FabricPrintingRouteImport.update({
+  id: '/fabric-printing',
+  path: '/fabric-printing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporateBrandingRoute = CorporateBrandingRouteImport.update({
+  id: '/corporate-branding',
+  path: '/corporate-branding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandedGiftsRoute = BrandedGiftsRouteImport.update({
+  id: '/branded-gifts',
+  path: '/branded-gifts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferenceRoute = ReferenceRouteImport.update({
+  id: '/$reference',
+  path: '/$reference',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopIndexRoute = ShopIndexRouteImport.update({
+  id: '/shop/',
+  path: '/shop/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrintDesignsIndexRoute = PrintDesignsIndexRouteImport.update({
+  id: '/print-designs/',
+  path: '/print-designs/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutIndexRoute = CheckoutIndexRouteImport.update({
@@ -100,9 +116,14 @@ const CheckoutIndexRoute = CheckoutIndexRouteImport.update({
   path: '/checkout/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
-  id: '/checkout/success',
-  path: '/checkout/success',
+const ShopSlugRoute = ShopSlugRouteImport.update({
+  id: '/shop/$slug',
+  path: '/shop/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrintDesignsSlugRoute = PrintDesignsSlugRouteImport.update({
+  id: '/print-designs/$slug',
+  path: '/print-designs/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaymentCallbackReferenceRoute =
@@ -111,29 +132,15 @@ const PaymentCallbackReferenceRoute =
     path: '/payment-callback/$reference',
     getParentRoute: () => rootRouteImport,
   } as any)
-const PrintDesignsIndexRoute = PrintDesignsIndexRouteImport.update({
-  id: '/print-designs/',
-  path: '/print-designs/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrintDesignsSlugRoute = PrintDesignsSlugRouteImport.update({
-  id: '/print-designs/$slug',
-  path: '/print-designs/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ShopIndexRoute = ShopIndexRouteImport.update({
-  id: '/shop/',
-  path: '/shop/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ShopSlugRoute = ShopSlugRouteImport.update({
-  id: '/shop/$slug',
-  path: '/shop/$slug',
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/checkout/success',
+  path: '/checkout/success',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$reference': typeof ReferenceRoute
   '/about': typeof AboutRoute
   '/branded-gifts': typeof BrandedGiftsRoute
   '/cart': typeof CartRoute
@@ -156,6 +163,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$reference': typeof ReferenceRoute
   '/about': typeof AboutRoute
   '/branded-gifts': typeof BrandedGiftsRoute
   '/cart': typeof CartRoute
@@ -179,6 +187,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$reference': typeof ReferenceRoute
   '/about': typeof AboutRoute
   '/branded-gifts': typeof BrandedGiftsRoute
   '/cart': typeof CartRoute
@@ -203,6 +212,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$reference'
     | '/about'
     | '/branded-gifts'
     | '/cart'
@@ -225,6 +235,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$reference'
     | '/about'
     | '/branded-gifts'
     | '/cart'
@@ -247,6 +258,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$reference'
     | '/about'
     | '/branded-gifts'
     | '/cart'
@@ -270,6 +282,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ReferenceRoute: typeof ReferenceRoute
   AboutRoute: typeof AboutRoute
   BrandedGiftsRoute: typeof BrandedGiftsRoute
   CartRoute: typeof CartRoute
@@ -293,81 +306,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/branded-gifts': {
-      id: '/branded-gifts'
-      path: '/branded-gifts'
-      fullPath: '/branded-gifts'
-      preLoaderRoute: typeof BrandedGiftsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cart': {
-      id: '/cart'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/corporate-branding': {
-      id: '/corporate-branding'
-      path: '/corporate-branding'
-      fullPath: '/corporate-branding'
-      preLoaderRoute: typeof CorporateBrandingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fabric-printing': {
-      id: '/fabric-printing'
-      path: '/fabric-printing'
-      fullPath: '/fabric-printing'
-      preLoaderRoute: typeof FabricPrintingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/made-to-order': {
-      id: '/made-to-order'
-      path: '/made-to-order'
-      fullPath: '/made-to-order'
-      preLoaderRoute: typeof MadeToOrderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/refund-policy': {
-      id: '/refund-policy'
-      path: '/refund-policy'
-      fullPath: '/refund-policy'
-      preLoaderRoute: typeof RefundPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reviews': {
-      id: '/reviews'
-      path: '/reviews'
-      fullPath: '/reviews'
-      preLoaderRoute: typeof ReviewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/shipping': {
-      id: '/shipping'
-      path: '/shipping'
-      fullPath: '/shipping'
-      preLoaderRoute: typeof ShippingRouteImport
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sizing-framing': {
@@ -377,46 +320,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SizingFramingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/terms-and-conditions': {
-      id: '/terms-and-conditions'
-      path: '/terms-and-conditions'
-      fullPath: '/terms-and-conditions'
-      preLoaderRoute: typeof TermsAndConditionsRouteImport
+    '/shipping': {
+      id: '/shipping'
+      path: '/shipping'
+      fullPath: '/shipping'
+      preLoaderRoute: typeof ShippingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/checkout/': {
-      id: '/checkout/'
-      path: '/checkout'
-      fullPath: '/checkout/'
-      preLoaderRoute: typeof CheckoutIndexRouteImport
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/checkout/success': {
-      id: '/checkout/success'
-      path: '/checkout/success'
-      fullPath: '/checkout/success'
-      preLoaderRoute: typeof CheckoutSuccessRouteImport
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/payment-callback/$reference': {
-      id: '/payment-callback/$reference'
-      path: '/payment-callback/$reference'
-      fullPath: '/payment-callback/$reference'
-      preLoaderRoute: typeof PaymentCallbackReferenceRouteImport
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/print-designs/': {
-      id: '/print-designs/'
-      path: '/print-designs'
-      fullPath: '/print-designs/'
-      preLoaderRoute: typeof PrintDesignsIndexRouteImport
+    '/made-to-order': {
+      id: '/made-to-order'
+      path: '/made-to-order'
+      fullPath: '/made-to-order'
+      preLoaderRoute: typeof MadeToOrderRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/print-designs/$slug': {
-      id: '/print-designs/$slug'
-      path: '/print-designs/$slug'
-      fullPath: '/print-designs/$slug'
-      preLoaderRoute: typeof PrintDesignsSlugRouteImport
+    '/fabric-printing': {
+      id: '/fabric-printing'
+      path: '/fabric-printing'
+      fullPath: '/fabric-printing'
+      preLoaderRoute: typeof FabricPrintingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate-branding': {
+      id: '/corporate-branding'
+      path: '/corporate-branding'
+      fullPath: '/corporate-branding'
+      preLoaderRoute: typeof CorporateBrandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/branded-gifts': {
+      id: '/branded-gifts'
+      path: '/branded-gifts'
+      fullPath: '/branded-gifts'
+      preLoaderRoute: typeof BrandedGiftsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$reference': {
+      id: '/$reference'
+      path: '/$reference'
+      fullPath: '/$reference'
+      preLoaderRoute: typeof ReferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop/': {
@@ -426,6 +411,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/print-designs/': {
+      id: '/print-designs/'
+      path: '/print-designs'
+      fullPath: '/print-designs/'
+      preLoaderRoute: typeof PrintDesignsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/': {
+      id: '/checkout/'
+      path: '/checkout'
+      fullPath: '/checkout/'
+      preLoaderRoute: typeof CheckoutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop/$slug': {
       id: '/shop/$slug'
       path: '/shop/$slug'
@@ -433,11 +432,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/print-designs/$slug': {
+      id: '/print-designs/$slug'
+      path: '/print-designs/$slug'
+      fullPath: '/print-designs/$slug'
+      preLoaderRoute: typeof PrintDesignsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-callback/$reference': {
+      id: '/payment-callback/$reference'
+      path: '/payment-callback/$reference'
+      fullPath: '/payment-callback/$reference'
+      preLoaderRoute: typeof PaymentCallbackReferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/success': {
+      id: '/checkout/success'
+      path: '/checkout/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ReferenceRoute: ReferenceRoute,
   AboutRoute: AboutRoute,
   BrandedGiftsRoute: BrandedGiftsRoute,
   CartRoute: CartRoute,
