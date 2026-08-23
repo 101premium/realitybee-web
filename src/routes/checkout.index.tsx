@@ -1,5 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, type FormEvent, type ReactNode, type InputHTMLAttributes } from "react";
+import {
+  useState,
+  type FormEvent,
+  type ReactNode,
+  type InputHTMLAttributes,
+  type SelectHTMLAttributes,
+} from "react";
 import { toast } from "sonner";
 import { AlertCircle } from "lucide-react";
 import { useCart, cartTotal, money } from "@/lib/cart";
@@ -21,12 +27,21 @@ type Details = {
   city: string;
   stateCode: string;
   postalCode: string;
+  country: string;
 };
+
+// Flat shipping rates in USD — Nigeria is domestic, everywhere else is international.
+const SHIPPING_DOMESTIC = 5;
+const SHIPPING_INTERNATIONAL = 25;
+
+function shippingCostFor(country: string) {
+  return country.trim().toLowerCase() === "nigeria" ? SHIPPING_DOMESTIC : SHIPPING_INTERNATIONAL;
+}
 
 function CheckoutPage() {
   const items = useCart((s) => s.items);
   const clear = useCart((s) => s.clear);
-  const total = cartTotal(items);
+  const subtotal = cartTotal(items);
   const navigate = useNavigate();
 
   const [step, setStep] = useState<"details" | "payment">("details");
@@ -36,6 +51,9 @@ function CheckoutPage() {
   // Shown inline above the submit button as well as via toast — a toast can be
   // missed or auto-dismissed, and a failed payment needs to stay on screen.
   const [formError, setFormError] = useState<string | null>(null);
+
+  const shipping = details ? shippingCostFor(details.country) : null;
+  const total = subtotal + (shipping ?? 0);
 
   function fail(message: string) {
     setFormError(message);
@@ -61,6 +79,7 @@ function CheckoutPage() {
       city: value("city"),
       stateCode: value("stateCode"),
       postalCode: value("postalCode"),
+      country: value("country"),
     };
 
     setFormError(null);
@@ -193,15 +212,22 @@ function CheckoutPage() {
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label="Postcode" name="postalCode" required />
-                  <Field label="Country" name="country" defaultValue="Nigeria" readOnly />
+                  <SelectField label="Country" name="country" defaultValue="Nigeria">
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                  </SelectField>
                 </div>
               </Fieldset>
             </>
           ) : (
             <Fieldset title="Payment">
               <p className="text-sm text-muted-foreground">
-                Paying {money(total)} by card. Your card details are encrypted on our server before
-                being sent to the payment provider.
+                Paying {money(total)} by card (includes {money(shipping ?? 0)} shipping).
               </p>
               <Field
                 label="Card number"
@@ -254,7 +280,19 @@ function CheckoutPage() {
               </li>
             ))}
           </ul>
-          <div className="mt-5 flex justify-between border-t border-border pt-4 text-base font-semibold">
+          <dl className="mt-4 space-y-2 border-t border-border pt-4 text-sm">
+            <div className="flex justify-between">
+              <dt className="text-muted-foreground">Subtotal</dt>
+              <dd className="font-medium">{money(subtotal)}</dd>
+            </div>
+            <div className="flex justify-between">
+              <dt className="text-muted-foreground">Shipping</dt>
+              <dd className="font-medium">
+                {shipping === null ? "Calculated at next step" : money(shipping)}
+              </dd>
+            </div>
+          </dl>
+          <div className="mt-3 flex justify-between border-t border-border pt-4 text-base font-semibold">
             <span>Total</span>
             <span>{money(total)}</span>
           </div>
@@ -308,6 +346,26 @@ function Field({ label, ...props }: InputHTMLAttributes<HTMLInputElement> & { la
         {...props}
         className="mt-1.5 block w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
       />
+    </label>
+  );
+}
+
+function SelectField({
+  label,
+  children,
+  ...props
+}: SelectHTMLAttributes<HTMLSelectElement> & { label: string }) {
+  return (
+    <label className="block">
+      <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+        {label}
+      </span>
+      <select
+        {...props}
+        className="mt-1.5 block w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+      >
+        {children}
+      </select>
     </label>
   );
 }

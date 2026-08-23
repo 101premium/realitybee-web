@@ -396,7 +396,7 @@ function BrandedGiftsPage() {
               <Phone className="h-4 w-4 text-accent" /> +234 912 593 7437
             </span>
             <span className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-accent" /> realitybeeltd@gmail.com
+              <Mail className="h-4 w-4 text-accent" /> realitybee@gmail.com
             </span>
             <span className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-accent" /> 5 Ikosi Road, Oregun, Ikeja, Lagos
