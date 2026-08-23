@@ -2,15 +2,22 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Star, ArrowLeft, Truck, Package, Sparkles } from "lucide-react";
-import { getProductBySlug, products, type Product } from "@/data/products";
+import { ApiError, fetchProduct, fetchProducts, parsePrice } from "@/lib/api";
 import { useCart, money } from "@/lib/cart";
 import { ProductCard } from "@/components/product-card";
 
 export const Route = createFileRoute("/shop/$slug")({
-  loader: ({ params }) => {
-    const product = getProductBySlug(params.slug);
-    if (!product) throw notFound();
-    return { product };
+  loader: async ({ params }) => {
+    const product = await fetchProduct(params.slug).catch((error) => {
+      if (error instanceof ApiError && error.status === 404) throw notFound();
+      throw error;
+    });
+
+    const related = (await fetchProducts({ category: product.category }))
+      .filter((p) => p.slug !== product.slug)
+      .slice(0, 4);
+
+    return { product, related };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -23,8 +30,8 @@ export const Route = createFileRoute("/shop/$slug")({
         { name: "description", content: p.description.slice(0, 155) },
         { property: "og:title", content: `${p.title} — SolunaSoul` },
         { property: "og:description", content: p.description.slice(0, 155) },
-        { property: "og:image", content: p.image },
-        { name: "twitter:image", content: p.image },
+        { property: "og:image", content: p.imageUrl },
+        { name: "twitter:image", content: p.imageUrl },
       ],
     };
   },
@@ -42,25 +49,21 @@ const SIZE_MULTIPLIER: Record<string, number> = {
   A1: 1.4641,
 };
 
-// Artwork prices increased by 50% across all sizes; discount display removed.
-const ARTWORK_PRICE_MULTIPLIER = 1.5;
-
 function ProductPage() {
-  const { product } = Route.useLoaderData() as { product: Product };
+  const { product, related } = Route.useLoaderData();
   const add = useCart((s) => s.add);
   const [size, setSize] = useState("A5");
   const [qty, setQty] = useState(1);
 
-  const related = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
-
   const avgStars = product.reviews.length
-    ? product.reviews.reduce((n, r) => n + r.stars, 0) / product.reviews.length
+    ? product.reviews.reduce((n, r) => n + (r.stars ?? 0), 0) / product.reviews.length
     : 5;
 
   const sizeMultiplier = SIZE_MULTIPLIER[size] ?? 1;
-  const unitPrice = product.salePrice * sizeMultiplier * ARTWORK_PRICE_MULTIPLIER;
+  // The catalogue's scraped Etsy prices carry odd cents (e.g. $140.11) — round to a
+  // whole dollar before applying the size multiplier.
+  const basePrice = Math.round(parsePrice(product.priceUsd));
+  const unitPrice = basePrice * sizeMultiplier;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
@@ -75,7 +78,7 @@ function ProductPage() {
         <div>
           <div className="overflow-hidden rounded-sm bg-muted">
             <img
-              src={product.image}
+              src={product.imageUrl}
               alt={product.title}
               className="w-full object-cover"
             />
@@ -158,7 +161,16 @@ function ProductPage() {
             </div>
             <button
               onClick={() => {
-                add({ ...product, salePrice: unitPrice }, qty);
+                add(
+                  {
+                    id: product.id,
+                    slug: product.slug,
+                    title: product.title,
+                    image: product.imageUrl,
+                    salePrice: unitPrice,
+                  },
+                  qty,
+                );
                 toast.success("Added to basket", {
                   description: `${product.title.slice(0, 60)}${product.title.length > 60 ? "…" : ""} · ${size} · Print only`,
                 });
@@ -212,11 +224,11 @@ function ProductPage() {
             {product.reviews.map((r, i) => (
               <div key={i} className="rounded-md border border-border bg-card p-5">
                 <div className="flex text-accent">
-                  {Array.from({ length: r.stars }).map((_, j) => (
+                  {Array.from({ length: r.stars ?? 0 }).map((_, j) => (
                     <Star key={j} className="h-4 w-4 fill-current" />
                   ))}
                 </div>
-                <p className="mt-3 text-sm leading-relaxed">“{r.text}”</p>
+                <p className="mt-3 text-sm leading-relaxed">"{r.text}"</p>
                 <p className="mt-4 text-xs text-muted-foreground">
                   <span className="font-semibold text-foreground">{r.author}</span> · {r.date}
                 </p>
