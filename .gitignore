@@ -144,3 +144,5 @@ vite.config.ts.timestamp-*
 .DS_Store
 .DS_Store
 src/.DS_Store
+.idea/
+.lovable/
