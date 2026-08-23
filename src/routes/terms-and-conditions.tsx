@@ -40,8 +40,8 @@ function TermsAndConditionsPage() {
       <p className="mt-3 text-muted-foreground">
         Reality Bee Limited is a print, brand and fabric studio registered in Nigeria, operating
         from 5 Ikosi Road, Oregun, Ikeja, Lagos, Nigeria. You can contact us by email at{" "}
-        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">
-          realitybee@gmail.com
+        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">
+          realitybeeltd@gmail.com
         </a>{" "}
         or by phone at{" "}
         <a href="tel:+2349125937437" className="underline hover:text-accent">
@@ -164,8 +164,8 @@ function TermsAndConditionsPage() {
       <h2 className="mt-10 font-display text-2xl">Contact us</h2>
       <p className="mt-3 text-muted-foreground">
         If you have any questions about these terms, please contact us at{" "}
-        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">
-          realitybee@gmail.com
+        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">
+          realitybeeltd@gmail.com
         </a>{" "}
         or{" "}
         <a href="tel:+2349125937437" className="underline hover:text-accent">

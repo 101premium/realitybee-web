@@ -88,16 +88,16 @@ const priceList: Row[] = [
 ];
 
 const designServices = [
-  ["Basic Artwork Adjustment", "$5.00"],
-  ["Pattern Repeat Setup", "$8.00"],
+  ["Basic Artwork Adjustment", "$25.00"],
+  ["Pattern Repeat Setup", "$30.00"],
   ["Custom African Print Design", "$35.00 – $150.00"],
-  ["Logo Placement Design", "$15.00"],
-  ["Colour Matching Service", "$10.00"],
+  ["Logo Placement Design", "$35.00"],
+  ["Colour Matching Service", "$25.00"],
 ];
 
 const sampling = [
-  ["A4 Fabric Sample", "$3.50"],
-  ["0.5 Metre Sample", "$5.50"],
+  ["A4 Fabric Sample", "$25.00"],
+  ["0.5 Metre Sample", "$30.00"],
   ["1 Metre Trial Print", "Standard Rate"],
 ];
 
@@ -126,8 +126,8 @@ const volume = [
 
 const addOns = [
   ["Express Printing (24 Hours)", "+30%"],
-  ["Colour Proof", "$7.50"],
-  ["Premium Packaging", "From $3.00"],
+  ["Colour Proof", "$25.00"],
+  ["Premium Packaging", "From $30.00"],
   ["Nationwide Delivery", "At Cost"],
   ["International Shipping", "At Cost"],
 ];
@@ -422,7 +422,7 @@ function FabricPrintingPage() {
               <Phone className="h-4 w-4 text-accent" /> +234 912 593 7437
             </span>
             <span className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-accent" /> realitybee@gmail.com
+              <Mail className="h-4 w-4 text-accent" /> realitybeeltd@gmail.com
             </span>
             <span className="flex items-center gap-2">
               <Globe2 className="h-4 w-4 text-accent" /> www.realitybee.com.ng
