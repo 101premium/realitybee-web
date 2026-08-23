@@ -1,9 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { products, categories } from "@/data/products";
+import { fetchCategories, fetchProducts, parsePrice } from "@/lib/api";
 import { ProductCard } from "@/components/product-card";
 
 export const Route = createFileRoute("/shop/")({
+  loader: async () => {
+    const [products, categories] = await Promise.all([fetchProducts(), fetchCategories()]);
+    return { products, categories: categories.map((c) => c.name).sort() };
+  },
   head: () => ({
     meta: [
       { title: "Shop all art prints — SolunaSoul" },
@@ -23,15 +27,16 @@ export const Route = createFileRoute("/shop/")({
 });
 
 function ShopPage() {
+  const { products, categories } = Route.useLoaderData();
   const [cat, setCat] = useState<string>("All");
   const [sort, setSort] = useState<"featured" | "priceAsc" | "priceDesc">("featured");
 
   const list = useMemo(() => {
     let l = cat === "All" ? products : products.filter((p) => p.category === cat);
-    if (sort === "priceAsc") l = [...l].sort((a, b) => a.salePrice - b.salePrice);
-    if (sort === "priceDesc") l = [...l].sort((a, b) => b.salePrice - a.salePrice);
+    if (sort === "priceAsc") l = [...l].sort((a, b) => parsePrice(a.priceUsd) - parsePrice(b.priceUsd));
+    if (sort === "priceDesc") l = [...l].sort((a, b) => parsePrice(b.priceUsd) - parsePrice(a.priceUsd));
     return l;
-  }, [cat, sort]);
+  }, [cat, sort, products]);
 
   const tabs = ["All", ...categories];
 

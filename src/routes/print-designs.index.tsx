@@ -1,21 +1,33 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { printDesigns } from "@/data/print-designs";
+import { fetchProducts, parsePrice } from "@/lib/api";
+import { money } from "@/lib/cart";
 
 export const Route = createFileRoute("/print-designs/")({
+  // Only designs registered as products in the cart API (matched by slug) are
+  // sellable — everything else is dropped rather than shown with a fake price.
+  loader: async () => {
+    const products = await fetchProducts();
+    const priceBySlug = new Map(products.map((p) => [p.slug, Math.round(parsePrice(p.priceUsd))]));
+    const available = printDesigns
+      .filter((d) => priceBySlug.has(d.slug))
+      .map((d) => ({ design: d, price: priceBySlug.get(d.slug)! }));
+    return { available };
+  },
   head: () => ({
     meta: [
       { title: "African Print Designs — Digital Fabric Prints | Reality Bee" },
       {
         name: "description",
         content:
-          "Digital African print designs for fabric printing. Fixed $25.00 per design. Colour variation available on request. Contemporary & cultural collections.",
+          "Digital African print designs for fabric printing. Colour variation available on request. Contemporary & cultural collections.",
       },
       { property: "og:title", content: "African Print Designs — Digital Fabric Prints" },
       {
         property: "og:description",
         content:
-          "60 digital African fabric print designs — $25.00 each. Contemporary and cultural collections for fabric printing.",
+          "Digital African fabric print designs. Contemporary and cultural collections for fabric printing.",
       },
     ],
   }),
@@ -23,10 +35,11 @@ export const Route = createFileRoute("/print-designs/")({
 });
 
 function PrintDesignsIndex() {
+  const { available } = Route.useLoaderData();
   const [cat, setCat] = useState<"All" | "Contemporary" | "Cultural">("All");
   const list = useMemo(
-    () => (cat === "All" ? printDesigns : printDesigns.filter((d) => d.category === cat)),
-    [cat],
+    () => (cat === "All" ? available : available.filter((a) => a.design.category === cat)),
+    [cat, available],
   );
   const tabs: Array<"All" | "Contemporary" | "Cultural"> = ["All", "Contemporary", "Cultural"];
 
@@ -46,9 +59,6 @@ function PrintDesignsIndex() {
             request.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
-            <span className="rounded-full bg-primary px-4 py-1.5 font-semibold text-primary-foreground">
-              $25.00 per design
-            </span>
             <span className="rounded-full border border-border bg-card px-4 py-1.5 font-medium">
               For fabric printing
             </span>
@@ -77,12 +87,12 @@ function PrintDesignsIndex() {
             ))}
           </div>
           <p className="text-sm text-muted-foreground">
-            Showing {list.length} of {printDesigns.length} designs
+            Showing {list.length} of {available.length} designs
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
-          {list.map((d) => (
+          {list.map(({ design: d, price }) => (
             <Link
               key={d.id}
               to="/print-designs/$slug"
@@ -104,7 +114,7 @@ function PrintDesignsIndex() {
                 <h3 className="text-sm font-medium leading-snug text-foreground group-hover:text-primary">
                   {d.name}
                 </h3>
-                <p className="text-sm font-semibold text-primary">$25.00</p>
+                <p className="text-sm font-semibold text-primary">{money(price)}</p>
               </div>
             </Link>
           ))}

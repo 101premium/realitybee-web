@@ -1,13 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import type { Product } from "@/data/products";
+import type { ApiProductSummary } from "@/lib/api";
+import { parsePrice } from "@/lib/api";
 import { money } from "@/lib/cart";
 
-// Artwork prices increased by 50%; discount display removed.
-const ARTWORK_PRICE_MULTIPLIER = 1.5;
-
-export function ProductCard({ product }: { product: Product }) {
-  const salePrice = product.salePrice * ARTWORK_PRICE_MULTIPLIER;
-  const originalPrice = product.originalPrice * ARTWORK_PRICE_MULTIPLIER;
+export function ProductCard({ product }: { product: ApiProductSummary }) {
+  const salePrice = Math.round(parsePrice(product.priceUsd));
 
   return (
     <Link
@@ -17,7 +14,7 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="relative overflow-hidden rounded-sm bg-muted">
         <img
-          src={product.image}
+          src={product.imageUrl}
           alt={product.title}
           loading="lazy"
           className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.03]"

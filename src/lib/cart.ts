@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Product } from "@/data/products";
 
 export type CartItem = {
   id: string;
@@ -11,9 +10,18 @@ export type CartItem = {
   qty: number;
 };
 
+/** Minimal shape needed to add an item to the cart — decoupled from any one product source. */
+type AddableProduct = {
+  id: string;
+  slug: string;
+  title: string;
+  image: string;
+  salePrice: number;
+};
+
 type CartState = {
   items: CartItem[];
-  add: (p: Product, qty?: number) => void;
+  add: (p: AddableProduct, qty?: number) => void;
   remove: (id: string) => void;
   setQty: (id: string, qty: number) => void;
   clear: () => void;
