@@ -3,10 +3,19 @@ import { useMemo, useState } from "react";
 import { fetchCategories, fetchProducts, parsePrice } from "@/lib/api";
 import { ProductCard } from "@/components/product-card";
 
+// These product lines share the same cart-API product table but have their own
+// dedicated pages (/print-designs, /branded-gifts) — never show them under Art Prints.
+const EXCLUDED_CATEGORIES = new Set(["Contemporary", "Cultural", "Branded Gifts"]);
+
 export const Route = createFileRoute("/shop/")({
   loader: async () => {
-    const [products, categories] = await Promise.all([fetchProducts(), fetchCategories()]);
-    return { products, categories: categories.map((c) => c.name).sort() };
+    const [allProducts, allCategories] = await Promise.all([fetchProducts(), fetchCategories()]);
+    const products = allProducts.filter((p) => !EXCLUDED_CATEGORIES.has(p.category));
+    const categories = allCategories
+      .map((c) => c.name)
+      .filter((name) => !EXCLUDED_CATEGORIES.has(name))
+      .sort();
+    return { products, categories };
   },
   head: () => ({
     meta: [
