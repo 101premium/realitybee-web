@@ -1,5 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, type FormEvent, type ReactNode, type InputHTMLAttributes } from "react";
+import {
+  useState,
+  type FormEvent,
+  type ReactNode,
+  type InputHTMLAttributes,
+  type SelectHTMLAttributes,
+} from "react";
 import { toast } from "sonner";
 import { AlertCircle } from "lucide-react";
 import { useCart, cartTotal, money } from "@/lib/cart";
@@ -193,15 +199,22 @@ function CheckoutPage() {
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Field label="Postcode" name="postalCode" required />
-                  <Field label="Country" name="country" defaultValue="Nigeria" readOnly />
+                  <SelectField label="Country" name="country" defaultValue="Nigeria">
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                  </SelectField>
                 </div>
               </Fieldset>
             </>
           ) : (
             <Fieldset title="Payment">
               <p className="text-sm text-muted-foreground">
-                Paying {money(total)} by card. Your card details are encrypted on our server before
-                being sent to the payment provider.
+                Paying {money(total)} by card.
               </p>
               <Field
                 label="Card number"
@@ -308,6 +321,26 @@ function Field({ label, ...props }: InputHTMLAttributes<HTMLInputElement> & { la
         {...props}
         className="mt-1.5 block w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
       />
+    </label>
+  );
+}
+
+function SelectField({
+  label,
+  children,
+  ...props
+}: SelectHTMLAttributes<HTMLSelectElement> & { label: string }) {
+  return (
+    <label className="block">
+      <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+        {label}
+      </span>
+      <select
+        {...props}
+        className="mt-1.5 block w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary"
+      >
+        {children}
+      </select>
     </label>
   );
 }

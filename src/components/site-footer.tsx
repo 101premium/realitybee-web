@@ -52,8 +52,8 @@ export function SiteFooter() {
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 shrink-0 text-accent" />
-              <a href="mailto:realitybeeltd@gmail.com" className="hover:text-primary">
-                realitybeeltd@gmail.com
+              <a href="mailto:realitybee@gmail.com" className="hover:text-primary">
+                realitybee@gmail.com
               </a>
             </li>
             <li className="flex items-center gap-2">
@@ -62,7 +62,7 @@ export function SiteFooter() {
             </li>
             <li className="flex items-center gap-2">
               <Globe2 className="h-4 w-4 shrink-0 text-accent" />
-              <a href="https://www.realitybeeltd.com.ng" className="hover:text-primary">www.realitybeeltd.com.ng</a>
+              <a href="https://www.realitybee.com.ng" className="hover:text-primary">www.realitybee.com.ng</a>
             </li>
           </ul>
         </div>
