@@ -217,9 +217,22 @@ function CheckoutPage() {
                     <option value="Ghana">Ghana</option>
                     <option value="Kenya">Kenya</option>
                     <option value="South Africa">South Africa</option>
+                    <option value="Egypt">Egypt</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Senegal">Senegal</option>
+                    <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                    <option value="Cameroon">Cameroon</option>
                     <option value="United Kingdom">United Kingdom</option>
+                    <option value="Ireland">Ireland</option>
                     <option value="United States">United States</option>
                     <option value="Canada">Canada</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="United Arab Emirates">United Arab Emirates</option>
+                    <option value="Australia">Australia</option>
+                    <option value="India">India</option>
                   </SelectField>
                 </div>
               </Fieldset>

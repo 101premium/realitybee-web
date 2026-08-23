@@ -2,13 +2,24 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { AlertTriangle, Check, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { printDesigns } from "@/data/print-designs";
-import { useCart } from "@/lib/cart";
+import { useCart, money } from "@/lib/cart";
+import { fetchProduct, parsePrice } from "@/lib/api";
 
 export const Route = createFileRoute("/print-designs/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const design = printDesigns.find((d) => d.slug === params.slug);
     if (!design) throw notFound();
-    return { design };
+
+    // Not registered as a product in the cart API yet — nothing to sell, so
+    // treat it the same as an unknown design rather than showing a fallback price.
+    const product = await fetchProduct(design.slug).catch(() => null);
+    if (!product) throw notFound();
+
+    // The catalogue's scraped Etsy prices carry odd cents (e.g. $140.11) —
+    // round to a whole dollar for display/charging here.
+    const price = Math.round(parsePrice(product.priceUsd));
+
+    return { design, price };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -16,13 +27,13 @@ export const Route = createFileRoute("/print-designs/$slug")({
         meta: [{ title: "Design not found — Reality Bee" }, { name: "robots", content: "noindex" }],
       };
     }
-    const { design } = loaderData;
+    const { design, price } = loaderData;
     return {
       meta: [
         { title: `${design.name} — African Print Design | Reality Bee` },
         {
           name: "description",
-          content: `${design.name} — digital African fabric print design. $25.00 per design. Colour variation available on request.`,
+          content: `${design.name} — digital African fabric print design. ${money(price)} per design. Colour variation available on request.`,
         },
         { property: "og:title", content: `${design.name} — African Print Design` },
         { property: "og:image", content: design.url },
@@ -45,11 +56,8 @@ export const Route = createFileRoute("/print-designs/$slug")({
   component: DesignPage,
 });
 
-// money() no longer converts currency, so this is the figure shown and charged.
-const PRICE = 25.00;
-
 function DesignPage() {
-  const { design } = Route.useLoaderData();
+  const { design, price } = Route.useLoaderData();
   const add = useCart((s) => s.add);
 
   const handleAdd = () => {
@@ -59,15 +67,8 @@ function DesignPage() {
         slug: design.slug,
         title: `${design.name} — Digital Fabric Print Design`,
         image: design.url,
-        salePrice: PRICE,
-        originalPrice: PRICE,
-        discount: 0,
-        category: design.category,
-        description: "Digital fabric print design",
-        images: [design.url],
-        options: [],
-        reviews: [],
-      } as unknown as Parameters<typeof add>[0],
+        salePrice: price,
+      },
       1,
     );
     toast.success(`${design.name} added — digital fabric print design`);
@@ -93,7 +94,7 @@ function DesignPage() {
             {design.category} Collection
           </p>
           <h1 className="mt-2 font-display text-4xl">{design.name}</h1>
-          <p className="mt-3 text-3xl font-semibold text-primary">$25.00</p>
+          <p className="mt-3 text-3xl font-semibold text-primary">{money(price)}</p>
           <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">
             Digital fabric print design · For fabric printing use
           </p>
@@ -115,7 +116,7 @@ function DesignPage() {
             onClick={handleAdd}
             className="mt-8 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-widest text-primary-foreground hover:bg-primary/90"
           >
-            Add fabric print design — $25.00
+            Add fabric print design — {money(price)}
           </button>
 
           <Link
