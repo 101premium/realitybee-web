@@ -110,7 +110,7 @@ function ShippingPage() {
       <h2 className="mt-10 font-display text-2xl">Contact</h2>
       <p className="mt-3 text-muted-foreground">
         Delivery questions? Reach us at{" "}
-        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">realitybee@gmail.com</a>{" "}
+        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">realitybeeltd@gmail.com</a>{" "}
         or <a href="tel:+2349125937437" className="underline hover:text-accent">+234 912 593 7437</a>.
       </p>
     </div>

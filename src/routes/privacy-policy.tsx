@@ -32,7 +32,7 @@ function PrivacyPolicyPage() {
       <p className="mt-3 text-muted-foreground">
         Reality Bee Limited is the data controller for personal data collected
         through this website and our order channels. You can reach us at{" "}
-        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">realitybee@gmail.com</a>{" "}
+        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">realitybeeltd@gmail.com</a>{" "}
         or at 5 Ikosi Road, Oregun, Ikeja, Lagos, Nigeria.
       </p>
 
@@ -106,7 +106,7 @@ function PrivacyPolicyPage() {
       </ul>
       <p className="mt-3 text-muted-foreground">
         To exercise any of these rights, email us at{" "}
-        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">realitybee@gmail.com</a>.
+        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">realitybeeltd@gmail.com</a>.
       </p>
 
       <h2 className="mt-10 font-display text-2xl">Cookies</h2>
@@ -126,7 +126,7 @@ function PrivacyPolicyPage() {
       <h2 className="mt-10 font-display text-2xl">Contact</h2>
       <p className="mt-3 text-muted-foreground">
         Questions about your data or this policy? Contact us at{" "}
-        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">realitybee@gmail.com</a>{" "}
+        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">realitybeeltd@gmail.com</a>{" "}
         or <a href="tel:+2349125937437" className="underline hover:text-accent">+234 912 593 7437</a>.
       </p>
     </div>
