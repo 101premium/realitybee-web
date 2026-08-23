@@ -29,8 +29,8 @@ function TermsAndConditionsPage() {
       <p className="mt-4 text-sm text-muted-foreground">Last updated: July 2026</p>
       <p className="mt-4 text-muted-foreground">
         These terms and conditions govern your use of the Reality Bee Limited website at{" "}
-        <a href="https://www.realitybeeltd.com.ng" className="underline hover:text-accent">
-          www.realitybeeltd.com.ng
+        <a href="https://www.realitybee.com.ng" className="underline hover:text-accent">
+          www.realitybee.com.ng
         </a>{" "}
         and any orders you place with us. By using our site or placing an order, you agree to these
         terms. If you do not agree, please do not use our website or services.
@@ -40,8 +40,8 @@ function TermsAndConditionsPage() {
       <p className="mt-3 text-muted-foreground">
         Reality Bee Limited is a print, brand and fabric studio registered in Nigeria, operating
         from 5 Ikosi Road, Oregun, Ikeja, Lagos, Nigeria. You can contact us by email at{" "}
-        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">
-          realitybeeltd@gmail.com
+        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">
+          realitybee@gmail.com
         </a>{" "}
         or by phone at{" "}
         <a href="tel:+2349125937437" className="underline hover:text-accent">
@@ -93,8 +93,7 @@ function TermsAndConditionsPage() {
         orders may require a deposit or full payment before production begins.
       </p>
       <p className="mt-3 text-muted-foreground">
-        Payments are processed through secure third-party payment providers. We do not store full
-        card details on our servers.
+        Payments are processed through secure third-party payment providers.
       </p>
 
       <h2 className="mt-10 font-display text-2xl">Production and delivery</h2>
@@ -165,8 +164,8 @@ function TermsAndConditionsPage() {
       <h2 className="mt-10 font-display text-2xl">Contact us</h2>
       <p className="mt-3 text-muted-foreground">
         If you have any questions about these terms, please contact us at{" "}
-        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">
-          realitybeeltd@gmail.com
+        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">
+          realitybee@gmail.com
         </a>{" "}
         or{" "}
         <a href="tel:+2349125937437" className="underline hover:text-accent">

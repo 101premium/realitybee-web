@@ -22,7 +22,7 @@ function PrivacyPolicyPage() {
       <p className="mt-4 text-muted-foreground">
         This policy explains how <strong>Reality Bee Limited</strong> ("we", "us", "our")
         collects, uses and protects personal information when you use our
-        website <a href="https://www.realitybeeltd.com.ng" className="underline hover:text-accent">www.realitybeeltd.com.ng</a>{" "}
+        website <a href="https://www.realitybee.com.ng" className="underline hover:text-accent">www.realitybee.com.ng</a>{" "}
         or engage our services. We process personal data in line with the
         Nigeria Data Protection Act (NDPA) 2023 and, where applicable, the EU
         and UK General Data Protection Regulation (GDPR).
@@ -32,7 +32,7 @@ function PrivacyPolicyPage() {
       <p className="mt-3 text-muted-foreground">
         Reality Bee Limited is the data controller for personal data collected
         through this website and our order channels. You can reach us at{" "}
-        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">realitybeeltd@gmail.com</a>{" "}
+        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">realitybee@gmail.com</a>{" "}
         or at 5 Ikosi Road, Oregun, Ikeja, Lagos, Nigeria.
       </p>
 
@@ -40,7 +40,7 @@ function PrivacyPolicyPage() {
       <ul className="mt-3 list-disc space-y-1 pl-6 text-muted-foreground">
         <li><strong>Contact details</strong> — name, email address, phone number, delivery address.</li>
         <li><strong>Order information</strong> — items ordered, sizes, artwork or files you upload, order value and history.</li>
-        <li><strong>Payment details</strong> — processed directly by our payment providers; we do not store full card details on our servers.</li>
+        <li><strong>Payment details</strong> — processed directly by our payment providers; All payments are processed securely by our payment providers.</li>
         <li><strong>Correspondence</strong> — messages you send us by email, phone, WhatsApp or contact form.</li>
         <li><strong>Technical data</strong> — IP address, browser type, device information and pages visited, collected through cookies and similar technologies.</li>
       </ul>
@@ -106,7 +106,7 @@ function PrivacyPolicyPage() {
       </ul>
       <p className="mt-3 text-muted-foreground">
         To exercise any of these rights, email us at{" "}
-        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">realitybeeltd@gmail.com</a>.
+        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">realitybee@gmail.com</a>.
       </p>
 
       <h2 className="mt-10 font-display text-2xl">Cookies</h2>
@@ -126,7 +126,7 @@ function PrivacyPolicyPage() {
       <h2 className="mt-10 font-display text-2xl">Contact</h2>
       <p className="mt-3 text-muted-foreground">
         Questions about your data or this policy? Contact us at{" "}
-        <a href="mailto:realitybeeltd@gmail.com" className="underline hover:text-accent">realitybeeltd@gmail.com</a>{" "}
+        <a href="mailto:realitybee@gmail.com" className="underline hover:text-accent">realitybee@gmail.com</a>{" "}
         or <a href="tel:+2349125937437" className="underline hover:text-accent">+234 912 593 7437</a>.
       </p>
     </div>

@@ -97,7 +97,7 @@ function CartPage() {
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-foreground">Shipping</dt>
-                <dd className="font-medium text-primary">Free</dd>
+                <dd className="font-medium text-muted-foreground">Calculated at checkout</dd>
               </div>
             </dl>
             <div className="mt-5 flex justify-between border-t border-border pt-4 text-base font-semibold">
