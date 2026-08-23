@@ -163,11 +163,10 @@ function orderApiConfig() {
 
   if (!username || !password) {
     // Fail loudly on the server rather than sending an unauthenticated request
-    // that would come back as an opaque 401.
-    throw new OrderApiError(
-      500,
-      "Order API credentials are not configured (MIDDLEWARE_USER / MIDDLEWARE_PASS).",
-    );
+    // that would come back as an opaque 401. The specific cause is for our logs only —
+    // the message crosses the RPC boundary and lands verbatim in the shopper's UI.
+    console.error("Order API credentials are not configured (MIDDLEWARE_USER / MIDDLEWARE_PASS).");
+    throw new OrderApiError(500, "Payment service is unavailable.");
   }
 
   const authorization = `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`;
@@ -180,15 +179,23 @@ async function orderApiFetch<T>(
 ): Promise<T> {
   const { baseUrl, authorization } = orderApiConfig();
 
-  const response = await fetch(`${baseUrl}/api/v1/order${path}`, {
-    method: init.method,
-    headers: {
-      Authorization: authorization,
-      Accept: "*/*",
-      ...(init.body === undefined ? {} : { "Content-Type": "application/json" }),
-    },
-    body: init.body === undefined ? undefined : JSON.stringify(init.body),
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}/api/v1/order${path}`, {
+      method: init.method,
+      headers: {
+        Authorization: authorization,
+        Accept: "*/*",
+        ...(init.body === undefined ? {} : { "Content-Type": "application/json" }),
+      },
+      body: init.body === undefined ? undefined : JSON.stringify(init.body),
+    });
+  } catch (error) {
+    // DNS, TLS, connection-refused, timeout — none of these should surface Node's
+    // raw error message ("fetch failed") to the shopper.
+    console.error(`Order API request failed for ${init.method} ${path}:`, error);
+    throw new OrderApiError(502, "Payment service is unavailable.");
+  }
 
   const raw = await response.text();
 
