@@ -1,7 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { fetchProducts, parsePrice } from "@/lib/api";
+import { money } from "@/lib/cart";
 
 export const Route = createFileRoute("/branded-gifts")({
+  loader: async () => {
+    const products = await fetchProducts({ category: "Branded Gifts" });
+    const priceBySlug = new Map(products.map((p) => [p.slug, Math.round(parsePrice(p.priceUsd))]));
+    return { priceBySlug };
+  },
   head: () => ({
     meta: [
       { title: "Branded Gifts & Items — Reality Bee Limited" },
@@ -21,13 +28,14 @@ export const Route = createFileRoute("/branded-gifts")({
   component: BrandedGiftsPage,
 });
 
-type Item = { name: string; image: string; blurb: string; moq: string; specs?: string[] };
+type Item = { name: string; slug: string; image: string; blurb: string; moq: string; specs?: string[] };
 
 const MOQ = "100 pcs";
 
 const items: Item[] = [
   {
     name: "Branded Polo T-Shirt",
+    slug: "branded-polo-t-shirt",
     blurb: "Premium pique polos with embroidered or printed logos.",
     image: "/assets/products/custom-polo-tshirt-print-and-design-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -35,12 +43,12 @@ const items: Item[] = [
       "Size: S, M, L, XL, XXL (custom on request).",
       "Material: 100% cotton Polo Collar Neck",
       "Finishing: Full-color borderless / Flock printing or monogram embroidery print (optional)",
-      "Price: Customized t-shirt price starting $8.00 per one (Best Quality)",
       "Delivery: 2-3 working days at your doorstep in Lagos • 3-4 working days Nationwide",
     ],
   },
   {
     name: "Custom Round-Neck T-Shirt",
+    slug: "custom-round-neck-t-shirt",
     blurb: "Soft cotton tees printed in full colour for events and teams.",
     image: "/assets/products/quality-tshirt-print-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -48,12 +56,12 @@ const items: Item[] = [
       "Size: S, M, L, XL, XXL (custom on request).",
       "Material: 100% cotton material with Polo Option",
       "Finishing: Full DTF Borderless Printing",
-      "Price: Customized t-shirt price starting $6.50 per one (Best Quality)",
       "Delivery: 2-3 working days at your doorstep in Lagos • 3-4 working days Nationwide",
     ],
   },
   {
     name: "Branded Hoodie",
+    slug: "branded-hoodie",
     blurb: "Cosy fleece hoodies with embroidery or DTF printing.",
     image: "/assets/products/customized-hoodie-design-and-print-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -62,12 +70,12 @@ const items: Item[] = [
       "Size: Small to XXLarge",
       "Material: 100% cotton or Polyester",
       "Finishing: Full-color borderless / Flock printing or monogram embroidery print (optional).",
-      "Price: Quality Branded Hoodie Printing starting from $28.50 per one (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Branded Apron",
+    slug: "branded-apron",
     blurb: "Premium aprons for cafés, restaurants and brand activations.",
     image: "/assets/products/custom-branded-premuim-apron-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -75,12 +83,12 @@ const items: Item[] = [
       "Size: Small to XXLarge",
       "Material: 100% Canvas & cotton material",
       "Finishing: Full-color DTF Borderless Logo branding & well packaged for delivery",
-      "Price: Customized Apron price starting $13.00 per one (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Custom Pen",
+    slug: "custom-pen",
     blurb: "Metal and plastic pens laser-etched with your logo.",
     image: "/assets/products/top-quality-custom-pen-print-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -88,12 +96,12 @@ const items: Item[] = [
       "Material: Quality Plastic Pen",
       "Size: 5.25 inches long",
       "Finishing: Full colour UV printing",
-      "Price: Customized Plastic Pen Printing starting from $60 per copy (Best Quality).",
       "Delivery: 2-3 working days within Lagos • 3-4 working days Nationwide",
     ],
   },
   {
     name: "Coated Mug",
+    slug: "coated-mug",
     blurb: "Full-wrap colour-coated ceramic mugs — great gifts and giveaways.",
     image: "/assets/products/customized-coated-mug-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -102,12 +110,12 @@ const items: Item[] = [
       "Size: 11oz standard capacity",
       "Colours: White, black, red, blue, pink, green (inside/handle coated)",
       "Finishing: Full-wrap sublimation printing in vibrant full colour, dishwasher and microwave safe",
-      "Price: Coated mug printing starting from $3.50 per unit (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Cork-Bottom Mug",
+    slug: "cork-bottom-mug",
     blurb: "Premium ceramic mugs with a protective cork base.",
     image: "/assets/products/branded-cork-bottom-mug-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -115,12 +123,12 @@ const items: Item[] = [
       "Material: Premium ceramic body with natural cork base",
       "Size: 11oz standard capacity",
       "Finishing: Full-wrap sublimation printing with protective cork bottom to prevent scratches on surfaces",
-      "Price: Cork-bottom mug printing starting from $4.50 per unit (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Branded Insulated Tumbler",
+    slug: "branded-insulated-tumbler",
     blurb: "Stanley-style tumblers engraved or printed with your brand.",
     image: "/assets/products/branded-uncle-stanley-mug-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -128,24 +136,24 @@ const items: Item[] = [
       "Material: Double-walled stainless steel with vacuum insulation",
       "Size: 30oz / 40oz capacity with reusable straw and handle",
       "Finishing: Laser engraving or UV full-colour print, keeps drinks cold up to 24 hours and hot up to 12 hours",
-      "Price: Insulated tumbler branding starting from $18.50 per unit (Best Quality)",
       "Delivery: 3-5 working days at your doorstep in Lagos • 5-7 working days Nationwide",
     ],
   },
   {
     name: "3D Logo Embroidered Caps",
+    slug: "3d-logo-embroidered-caps",
     blurb: "Structured caps with raised 3D puff embroidery.",
     image: "/assets/products/3d-logo-embroideried-caps-in-lagos-nigeria.jpg",
     moq: MOQ,
     specs: [
       "Material: Full-colour thread 3D monogram embroidery printing",
       "Finishing: Perfectly trimmed and packaged for delivery",
-      "Price: Custom 3D Logo puff price starting $4.00 per one (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Branded Face Caps",
+    slug: "branded-face-caps",
     blurb: "Everyday caps printed or embroidered for teams and events.",
     image: "/assets/products/customized-face-cap-design-and-print-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -154,12 +162,12 @@ const items: Item[] = [
       "Material: Structured 6-panel cotton twill with adjustable strap",
       "Size: Free size, adjustable (custom sizing on request)",
       "Finishing: Full-colour DTF printing or flat embroidery on front, back and side panels",
-      "Price: Customized face cap printing starting from $3.50 per unit (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Custom Safety Jacket",
+    slug: "custom-safety-jacket",
     blurb: "High-visibility branded jackets for site and field teams.",
     image: "/assets/products/personalized-safety-jacket-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -167,12 +175,12 @@ const items: Item[] = [
       "Size: S, M, L, XL, XXL (custom on request).",
       "Material: Reflective Safety Jackets and Vests available in other colours (lemon and orange)",
       "Finishing: Full-color borderless / Flock printing or monogram embroidery print (optional)",
-      "Price: Customized Reflective Jacket price starting $7.50 per one (Best Quality)",
       "Delivery: 2-3 working days at your doorstep in Lagos • 3-4 working days Nationwide",
     ],
   },
   {
     name: "Custom Face Towel",
+    slug: "custom-face-towel",
     blurb: "Soft embroidered face towels — perfect gift items.",
     image: "/assets/products/embroidered-face-towel-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -181,12 +189,12 @@ const items: Item[] = [
       "Size: 30cm x 30cm (custom sizes on request)",
       "Colours: White, cream, navy, grey and custom shades",
       "Finishing: Flat or 3D thread embroidery of your logo, individually folded and packaged",
-      "Price: Custom face towel printing starting from $2.50 per unit (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Custom Bath Towel",
+    slug: "custom-bath-towel",
     blurb: "Plush embroidered towels for hotels, spas and gifting.",
     image: "/assets/products/quality-embroideried-towel-print-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -195,12 +203,12 @@ const items: Item[] = [
       "Size: 70cm x 140cm (custom sizes on request)",
       "Colours: White, cream, navy, black and custom shades",
       "Finishing: Flat or 3D thread embroidery of your logo, individually folded and packaged",
-      "Price: Custom bath towel printing starting from $8.50 per unit (Best Quality)",
       "Delivery: 3-5 working days at your doorstep in Lagos • 5-7 working days Nationwide",
     ],
   },
   {
     name: "A5 Branded Jotter",
+    slug: "a5-branded-jotter",
     blurb: "Executive jotters with your logo — great conference giveaways.",
     image: "/assets/products/top-quality-A5-jotter-print-and-design.jpg",
     moq: MOQ,
@@ -208,12 +216,12 @@ const items: Item[] = [
       "Size: A5 (148mm x 210mm)",
       "Material: Executive PU leather cover with 80 lined inner pages (70 gsm cream paper)",
       "Finishing: Gold or silver foil logo, silk-screen or debossed branding with elastic closure and ribbon marker",
-      "Price: A5 executive jotter printing starting from $4.50 per unit (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Branded Paper Bag",
+    slug: "branded-paper-bag",
     blurb: "Luxury paper bags for retail, gifting and packaging.",
     image: "/assets/products/top-quality-paper-bag-print-and-design-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -221,12 +229,12 @@ const items: Item[] = [
       "Material: 250-300 gsm art card, kraft or matte laminated paper",
       "Size: Small, medium, large and custom dimensions",
       "Finishing: Full-colour print with matte or gloss lamination and rope/twisted paper handles",
-      "Price: Custom paper bag printing starting from $85 per unit (Best Quality)",
       "Delivery: 3-5 working days at your doorstep in Lagos • 5-7 working days Nationwide",
     ],
   },
   {
     name: "Royal Throw Pillow",
+    slug: "royal-throw-pillow",
     blurb: "Full-colour printed throw pillows in premium fabrics.",
     image: "/assets/products/custom-royal-pillow-print-and-design-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -234,12 +242,12 @@ const items: Item[] = [
       'Size: 18" x 18" (custom sizes on request)',
       "Material: Premium velvet, linen or satin cover with hollow-fibre inner filling",
       "Finishing: Vibrant full sublimation print on front, back and sides with concealed zip",
-      "Price: Royal throw pillow printing starting from $5.50 per unit (Best Quality)",
       "Delivery: 3-5 working days at your doorstep in Lagos • 5-7 working days Nationwide",
     ],
   },
   {
     name: "Award Plaque",
+    slug: "award-plaque",
     blurb: "Personalised crystal, wood and acrylic award plaques.",
     image: "/assets/products/custom-award-plaque-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -247,12 +255,12 @@ const items: Item[] = [
       "Material: Premium crystal, wood or acrylic on a solid wooden base",
       'Size: Small (6"), medium (8") and large (10") — custom sizes on request',
       "Finishing: UV full-colour printing or laser engraving with velvet-lined gift box",
-      "Price: Custom award plaque starting from $12.50 per unit (Best Quality)",
       "Delivery: 4-5 working days at your doorstep in Lagos • 5-7 working days Nationwide",
     ],
   },
   {
     name: "Luxury Gift Box",
+    slug: "luxury-gift-box",
     blurb: "Bespoke branded gift boxes for corporate hampers.",
     image: "/assets/products/customized-luxury-box-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -260,12 +268,12 @@ const items: Item[] = [
       "Material: Rigid 1200-1500gsm greyboard wrapped in premium art paper or PU leather",
       "Size: Custom dimensions with EVA foam or satin inserts to fit your items",
       "Finishing: Full-colour print with foil stamping, embossing or spot UV; magnetic or ribbon-tie closure",
-      "Price: Luxury branded gift box starting from $4.50 per unit (Best Quality)",
       "Delivery: 5-7 working days at your doorstep in Lagos • 7-10 working days Nationwide",
     ],
   },
   {
     name: "Branded Mini Hand Fan",
+    slug: "branded-mini-hand-fan",
     blurb: "Lightweight branded fans — a hit at outdoor events.",
     image: "/assets/products/quality-branded-mini-hand-fan-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -273,12 +281,12 @@ const items: Item[] = [
       "Material: Durable ABS plastic body with 3-speed rechargeable USB motor",
       "Size: Handheld 18cm x 8cm mini fan with lanyard",
       "Finishing: Full-colour UV logo print on the handle and blades cover",
-      "Price: Branded mini hand fan starting from $3.80 per unit (Best Quality)",
       "Delivery: 3-4 working days at your doorstep in Lagos • 4-5 working days Nationwide",
     ],
   },
   {
     name: "Custom Umbrella",
+    slug: "custom-umbrella",
     blurb: "Full-colour umbrellas for staff, clients and promotions.",
     image: "/assets/products/custom-umbrella-printing-in-lagos-nigeria.jpg",
     moq: MOQ,
@@ -286,13 +294,14 @@ const items: Item[] = [
       "Material: Waterproof 190T polyester canopy with fibreglass ribs and wooden or metal handle",
       'Size: 23" x 8k straight umbrella (golf and foldable options available)',
       "Finishing: Full-colour sublimation or silk-screen printing across one or all panels",
-      "Price: Custom branded umbrella starting from $6.50 per unit (Best Quality)",
       "Delivery: 3-5 working days at your doorstep in Lagos • 5-7 working days Nationwide",
     ],
   },
 ];
 
 function BrandedGiftsPage() {
+  const { priceBySlug } = Route.useLoaderData();
+
   return (
     <div className="bg-background">
       <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-accent/15 via-background to-primary/10">
@@ -335,50 +344,60 @@ function BrandedGiftsPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
-          {items.map((item) => (
-            <article
-              key={item.name}
-              className="group overflow-hidden rounded-2xl border border-border/60 bg-card"
-            >
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-lg text-foreground">{item.name}</h3>
-                <p className="mt-1 text-xs text-muted-foreground">{item.blurb}</p>
-                <p className="mt-2 inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                  MOQ: {item.moq}
-                </p>
-                {item.specs && (
-                  <details className="mt-3 group/spec">
-                    <summary className="cursor-pointer text-xs font-semibold text-foreground hover:text-primary">
-                      Specifications
-                    </summary>
-                    <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
-                      {item.specs.map((s) => {
-                        const idx = s.indexOf(":");
-                        const label = idx > -1 ? s.slice(0, idx) : "";
-                        const value = idx > -1 ? s.slice(idx + 1).trim() : s;
-                        return (
-                          <li key={s}>
-                            {label && (
-                              <span className="font-semibold text-foreground">{label}:</span>
-                            )}{" "}
-                            {value}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </details>
-                )}
-              </div>
-            </article>
-          ))}
+          {items.map((item) => {
+            const price = priceBySlug.get(item.slug);
+            return (
+              <article
+                key={item.name}
+                className="group overflow-hidden rounded-2xl border border-border/60 bg-card"
+              >
+                <div className="aspect-square overflow-hidden bg-muted">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-display text-lg text-foreground">{item.name}</h3>
+                  <p className="mt-1 text-xs text-muted-foreground">{item.blurb}</p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    {price !== undefined && (
+                      <p className="text-sm font-semibold text-foreground">
+                        From {money(price)}
+                      </p>
+                    )}
+                    <p className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      MOQ: {item.moq}
+                    </p>
+                  </div>
+                  {item.specs && (
+                    <details className="mt-3 group/spec">
+                      <summary className="cursor-pointer text-xs font-semibold text-foreground hover:text-primary">
+                        Specifications
+                      </summary>
+                      <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+                        {item.specs.map((s) => {
+                          const idx = s.indexOf(":");
+                          const label = idx > -1 ? s.slice(0, idx) : "";
+                          const value = idx > -1 ? s.slice(idx + 1).trim() : s;
+                          return (
+                            <li key={s}>
+                              {label && (
+                                <span className="font-semibold text-foreground">{label}:</span>
+                              )}{" "}
+                              {value}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </details>
+                  )}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
