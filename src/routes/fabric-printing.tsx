@@ -277,7 +277,7 @@ function FabricPrintingPage() {
           </div>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <span className="flex items-center gap-1">
-              <Ruler className="h-4 w-4 text-primary" /> Min. order: 20 metres
+              <Ruler className="h-4 w-4 text-primary" /> Min. order: 10 metres
             </span>
             <span className="flex items-center gap-1">
               <Award className="h-4 w-4 text-primary" /> Premium quality
