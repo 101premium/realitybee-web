@@ -64,7 +64,7 @@ export const serviceReviews: ServiceReview[] = [
     company: "Aso-ebi coordinator",
     category: "Fabric Printing",
     stars: 5,
-    text: "We printed 250m of matching fabric for a wedding entourage — colour was consistent across every roll, which is rare in Lagos. Wholesale pricing at 100m+ made a real difference to our margin.",
+    text: "We printed 250m of matching fabric for a wedding entourage — colour was consistent across every roll, which is rare in Lagos. Wholesale pricing at 50m+ made a real difference to our margin.",
     date: "April 2026",
   },
 
