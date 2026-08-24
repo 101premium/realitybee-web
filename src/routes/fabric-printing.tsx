@@ -272,7 +272,7 @@ function FabricPrintingPage() {
           <div>
             <h2 className="font-display text-3xl text-foreground sm:text-4xl">Price List</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              All prices in US Dollars ($). Wholesale from 100 metres.
+              All prices in US Dollars ($). Wholesale from 50 metres.
             </p>
           </div>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -292,7 +292,7 @@ function FabricPrintingPage() {
                 <th className="px-4 py-3 text-left font-semibold">Service</th>
                 <th className="px-4 py-3 text-left font-semibold">Unit</th>
                 <th className="px-4 py-3 text-left font-semibold">Retail</th>
-                <th className="px-4 py-3 text-left font-semibold">Wholesale (100m+)</th>
+                <th className="px-4 py-3 text-left font-semibold">Wholesale (50m+)</th>
               </tr>
             </thead>
             <tbody>
