@@ -52,7 +52,7 @@ function ShopPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
       <div className="mb-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">SolunaSoul Collection</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary"></p>
         <h1 className="mt-2 font-display text-4xl sm:text-5xl">Shop all prints</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
           180 archival prints. Every piece is made-to-order and printed on 259gsm matte paper.
