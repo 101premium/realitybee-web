@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ShoppingBag } from "lucide-react";
 import { useCart, cartCount } from "@/lib/cart";
-import logo from "@/assets/reality-bee-logo.png.asset.json";
+import logo from "@/assets/reality-bee-logo-header.png.asset.json";
 
 export function SiteHeader() {
   const items = useCart((s) => s.items);
